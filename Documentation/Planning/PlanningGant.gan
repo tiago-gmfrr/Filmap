@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Filmap Planning" company="" webLink="http://" view-date="2020-01-21" view-index="0" gantt-divider-location="168" resource-divider-location="300" version="2.8.10" locale="fr">
+    <description/>
+    <view zooming-state="default:1" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="97" order="0"/>
+        <field id="tpd4" name="Date de début" width="25" order="1"/>
+        <field id="tpd5" name="Date de fin" width="27" order="2"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="210" order="0"/>
+        <field id="1" name="Rôle par défaut" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="1" wed="1" thu="1" fri="1" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="82" name="Etude de projet" meeting="false" start="2020-01-20" duration="1" complete="0" expand="true">
+            <depend id="86" type="2" difference="0" hardness="Strong"/>
+            <depend id="132" type="2" difference="0" hardness="Strong"/>
+            <depend id="195" type="2" difference="0" hardness="Strong"/>
+            <task id="83" name="Analyse" meeting="false" start="2020-01-20" duration="1" complete="0" expand="true"/>
+            <task id="84" name="Planning" meeting="false" start="2020-01-20" duration="1" complete="0" expand="true"/>
+            <task id="85" name="Documentation" meeting="false" start="2020-01-20" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="86" name="Base de données" color="#000000" meeting="false" start="2020-01-27" duration="1" complete="0" thirdDate="2020-01-20" thirdDate-constraint="0" expand="true">
+            <depend id="93" type="2" difference="0" hardness="Strong"/>
+            <task id="87" name="MCD" meeting="false" start="2020-01-27" duration="1" complete="0" expand="true"/>
+            <task id="88" name="Implémentation" meeting="false" start="2020-01-27" duration="1" complete="0" expand="true"/>
+            <task id="89" name="Création données" color="#8cb6ce" meeting="false" start="2020-01-27" duration="1" complete="0" thirdDate="2020-01-20" thirdDate-constraint="0" expand="true"/>
+            <task id="91" name="Test" color="#8cb6ce" meeting="false" start="2020-01-27" duration="1" complete="0" thirdDate="2020-01-20" thirdDate-constraint="0" expand="true"/>
+            <task id="92" name="Documentation" meeting="false" start="2020-01-27" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="93" name="Un utilisateur peut créer un nouveau compte et s'y connecter" color="#000000" meeting="false" start="2020-02-03" duration="1" complete="0" thirdDate="2020-01-20" thirdDate-constraint="0" expand="true">
+            <depend id="114" type="2" difference="0" hardness="Strong"/>
+            <depend id="152" type="2" difference="0" hardness="Strong"/>
+            <task id="94" name="Analyse" color="#8cb6ce" meeting="false" start="2020-02-03" duration="1" complete="0" thirdDate="2020-01-20" thirdDate-constraint="0" expand="true"/>
+            <task id="95" name="Implémentation" meeting="false" start="2020-02-03" duration="1" complete="0" expand="true"/>
+            <task id="97" name="Test" color="#8cb6ce" meeting="false" start="2020-02-03" duration="1" complete="0" thirdDate="2020-01-20" thirdDate-constraint="0" expand="true"/>
+            <task id="98" name="Documentation" meeting="false" start="2020-02-03" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="114" name="Un utilisateur authentifié peut avoir une liste de films préférés et à voir" color="#000000" meeting="false" start="2020-02-10" duration="2" complete="0" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true">
+            <depend id="167" type="2" difference="0" hardness="Strong"/>
+            <depend id="181" type="2" difference="0" hardness="Strong"/>
+            <task id="115" name="Analyse" meeting="false" start="2020-02-10" duration="2" complete="0" expand="true"/>
+            <task id="116" name="Implémentation" meeting="false" start="2020-02-10" duration="2" complete="0" expand="true"/>
+            <task id="117" name="Test" color="#8cb6ce" meeting="false" start="2020-02-10" duration="2" complete="0" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+            <task id="118" name="Documentation" meeting="false" start="2020-02-10" duration="2" complete="0" expand="true"/>
+        </task>
+        <task id="132" name="Un utilisateur peut rechercher des films ou des acteurs" color="#8cb6ce" meeting="false" start="2020-02-03" duration="2" complete="3" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true">
+            <task id="134" name="Analyse" color="#8cb6ce" meeting="false" start="2020-02-03" duration="2" complete="5" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+            <task id="135" name="Implémentation" meeting="false" start="2020-02-03" duration="2" complete="0" expand="true"/>
+            <task id="136" name="Test" color="#8cb6ce" meeting="false" start="2020-02-03" duration="2" complete="7" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+            <task id="137" name="Documentation" meeting="false" start="2020-02-03" duration="2" complete="0" expand="true"/>
+        </task>
+        <task id="152" name="Un utilisateur authentifié peut avoir une liste d'acteurs préférés" color="#000000" meeting="false" start="2020-02-10" duration="2" complete="0" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true">
+            <depend id="167" type="2" difference="0" hardness="Strong"/>
+            <depend id="181" type="2" difference="0" hardness="Strong"/>
+            <task id="153" name="Analyse" color="#8cb6ce" meeting="false" start="2020-02-10" duration="2" complete="0" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+            <task id="155" name="Implémentation" meeting="false" start="2020-02-10" duration="2" complete="0" expand="true"/>
+            <task id="156" name="Test" color="#8cb6ce" meeting="false" start="2020-02-10" duration="2" complete="0" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+            <task id="157" name="Documentation" meeting="false" start="2020-02-10" duration="2" complete="0" expand="true"/>
+        </task>
+        <task id="167" name="Un utilisateur peut imprimer une fiche contenant ses listes" color="#8cb6ce" meeting="false" start="2020-02-24" duration="2" complete="0" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true">
+            <task id="170" name="Analyse" meeting="false" start="2020-02-24" duration="2" complete="0" expand="true"/>
+            <task id="171" name="Implémentation" meeting="false" start="2020-02-24" duration="2" complete="0" expand="true"/>
+            <task id="172" name="Test" color="#8cb6ce" meeting="false" start="2020-02-24" duration="2" complete="0" thirdDate="2020-03-09" thirdDate-constraint="0" expand="true"/>
+            <task id="173" name="Documentation" meeting="false" start="2020-02-24" duration="2" complete="0" expand="true"/>
+        </task>
+        <task id="181" name="Un utilisateur peut envoyer par mail sa liste de films préférés / à voir" color="#000000" meeting="false" start="2020-03-09" duration="2" complete="0" thirdDate="2020-02-10" thirdDate-constraint="0" expand="true">
+            <task id="182" name="Analyse" meeting="false" start="2020-03-09" duration="2" complete="0" expand="true"/>
+            <task id="183" name="Implémentation" meeting="false" start="2020-03-09" duration="2" complete="0" expand="true"/>
+            <task id="184" name="Test" color="#8cb6ce" meeting="false" start="2020-03-09" duration="2" complete="0" thirdDate="2020-03-09" thirdDate-constraint="0" expand="true"/>
+            <task id="185" name="Documentation" meeting="false" start="2020-03-09" duration="2" complete="0" expand="true"/>
+        </task>
+        <task id="195" name="Design" color="#8cb6ce" meeting="false" start="2020-01-27" duration="3" complete="0" thirdDate="2020-01-06" thirdDate-constraint="0" expand="true">
+            <task id="202" name="Analyse" meeting="false" start="2020-01-27" duration="3" complete="0" expand="true"/>
+            <task id="204" name="Implémentation" meeting="false" start="2020-01-27" duration="3" complete="0" expand="true"/>
+        </task>
+        <task id="191" name="Finalisation de la documentation" meeting="false" start="2020-02-24" duration="4" complete="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
