@@ -12,10 +12,18 @@ namespace Filmap
 {
     public partial class frmCreationCompte : Form
     {
+        string pseudo = "";
+        string email = "";
+        string motDePasse = "";
+
         public frmCreationCompte()
         {
             InitializeComponent();
         }
+
+        public string Pseudo { get => pseudo; set => tbxPseudo.Text = value; }
+        public string Email { get => email; set => tbxEmail.Text = value; }
+        public string MotDePasse { get => motDePasse; set => tbxMotDePasse.Text = value; }
 
         private void btnAnnuler_Click(object sender, EventArgs e)
         {
