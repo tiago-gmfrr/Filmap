@@ -33,7 +33,7 @@ namespace Filmap_Login
         public bool AjouterUtilisateur(string email, string pseudo, string mdp, string sel)
         {
             MaConnexion.Open();
-            string sql = string.Format("INSERT INTO Utilisateurs(pseudo, mail, mdp, selmdp) VALUES('{0}','{1}','{2}','{3}')", pseudo, email, mdp, sel);
+            string sql = string.Format("INSERT INTO Utilisateur(pseudo, mail, mdp, selmdp) VALUES('{0}','{1}','{2}','{3}')", pseudo, email, mdp, sel);
             SQLiteCommand command = new SQLiteCommand(sql, MaConnexion);
             int nbInsert = command.ExecuteNonQuery();
             if (nbInsert > 0)
@@ -56,7 +56,7 @@ namespace Filmap_Login
         public string RecupererUtilisateurs()
         {
             MaConnexion.Open();
-            string sql = "SELECT * FROM Utilisateurs;";
+            string sql = "SELECT * FROM Utilisateur;";
             SQLiteCommand command = new SQLiteCommand(sql, MaConnexion);
             SQLiteDataReader dtReader = command.ExecuteReader();
 
@@ -72,5 +72,30 @@ namespace Filmap_Login
 
         }
 
+        /// <summary>
+        /// Vérifie la connexion
+        /// </summary>
+        /// <param name="pseudo">Email ou pseudo</param>
+        /// <param name="mdp"></param>
+        /// <returns></returns>
+        public bool VerifierConnexion(string pseudo, string mdp)
+        {
+            string utilisateurs = RecupererUtilisateurs();
+
+            string[] donnees = utilisateurs.Split(',');
+
+            string mdpHashe = donnees[3] + donnees[4];
+
+            if (((donnees[1] == pseudo) || (donnees[2] == pseudo)) && mdpHashe == mdp)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            
+        }
     }
 }
