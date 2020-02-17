@@ -32,9 +32,9 @@
             this.lblPseudo = new System.Windows.Forms.Label();
             this.lblMotDePasse = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbxPseudo = new System.Windows.Forms.TextBox();
+            this.tbxEmail = new System.Windows.Forms.TextBox();
+            this.tbxMotDePasse = new System.Windows.Forms.TextBox();
             this.btnCreationCompte = new System.Windows.Forms.Button();
             this.btnAnnuler = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -79,36 +79,36 @@
             this.lblEmail.TabIndex = 3;
             this.lblEmail.Text = "Votre email :";
             // 
-            // textBox1
+            // tbxPseudo
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(201, 84);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(189, 20);
-            this.textBox1.TabIndex = 4;
+            this.tbxPseudo.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.tbxPseudo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxPseudo.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxPseudo.Location = new System.Drawing.Point(201, 84);
+            this.tbxPseudo.Name = "tbxPseudo";
+            this.tbxPseudo.Size = new System.Drawing.Size(189, 20);
+            this.tbxPseudo.TabIndex = 4;
             // 
-            // textBox2
+            // tbxEmail
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(201, 114);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(189, 20);
-            this.textBox2.TabIndex = 5;
+            this.tbxEmail.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.tbxEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxEmail.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxEmail.Location = new System.Drawing.Point(201, 114);
+            this.tbxEmail.Name = "tbxEmail";
+            this.tbxEmail.Size = new System.Drawing.Size(189, 20);
+            this.tbxEmail.TabIndex = 5;
             // 
-            // textBox3
+            // tbxMotDePasse
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(201, 142);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.PasswordChar = '•';
-            this.textBox3.Size = new System.Drawing.Size(189, 20);
-            this.textBox3.TabIndex = 6;
+            this.tbxMotDePasse.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.tbxMotDePasse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbxMotDePasse.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxMotDePasse.Location = new System.Drawing.Point(201, 142);
+            this.tbxMotDePasse.Name = "tbxMotDePasse";
+            this.tbxMotDePasse.PasswordChar = '•';
+            this.tbxMotDePasse.Size = new System.Drawing.Size(189, 20);
+            this.tbxMotDePasse.TabIndex = 6;
             // 
             // btnCreationCompte
             // 
@@ -140,7 +140,7 @@
             this.btnAnnuler.UseVisualStyleBackColor = false;
             this.btnAnnuler.Click += new System.EventHandler(this.btnAnnuler_Click);
             // 
-            // CreationCompte
+            // frmCreationCompte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -148,16 +148,16 @@
             this.ClientSize = new System.Drawing.Size(419, 210);
             this.Controls.Add(this.btnAnnuler);
             this.Controls.Add(this.btnCreationCompte);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbxMotDePasse);
+            this.Controls.Add(this.tbxEmail);
+            this.Controls.Add(this.tbxPseudo);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.lblMotDePasse);
             this.Controls.Add(this.lblPseudo);
             this.Controls.Add(this.lblTitre);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "CreationCompte";
+            this.Name = "frmCreationCompte";
             this.Text = "Créer son compte";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -170,9 +170,9 @@
         private System.Windows.Forms.Label lblPseudo;
         private System.Windows.Forms.Label lblMotDePasse;
         private System.Windows.Forms.Label lblEmail;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbxPseudo;
+        private System.Windows.Forms.TextBox tbxEmail;
+        private System.Windows.Forms.TextBox tbxMotDePasse;
         private System.Windows.Forms.Button btnCreationCompte;
         private System.Windows.Forms.Button btnAnnuler;
     }
