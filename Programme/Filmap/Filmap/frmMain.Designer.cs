@@ -61,6 +61,7 @@
             this.lsbFilmTendance.Name = "lsbFilmTendance";
             this.lsbFilmTendance.Size = new System.Drawing.Size(254, 290);
             this.lsbFilmTendance.TabIndex = 3;
+            this.lsbFilmTendance.DoubleClick += new System.EventHandler(this.lsbFilmTendance_DoubleClick);
             // 
             // btnRecherche
             // 
@@ -90,6 +91,7 @@
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "Filmap";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
