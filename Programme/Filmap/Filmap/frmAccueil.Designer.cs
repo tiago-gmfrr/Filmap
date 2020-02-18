@@ -160,11 +160,12 @@
             this.Controls.Add(this.lblPseudo);
             this.Controls.Add(this.lblAccueil);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmAccueil";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Bienvenu dans Filmap";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Bienvenue dans Filmap";
             this.ResumeLayout(false);
             this.PerformLayout();
 
