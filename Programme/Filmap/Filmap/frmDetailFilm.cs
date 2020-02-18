@@ -17,9 +17,11 @@ namespace Filmap
             InitializeComponent();
         }
 
-        public frmDetailFilm(string titre, string dateSortie, string realisateur, string synopsis, string chiffreAffaire, string budget, string langueOri, string noteImdb)
+        public frmDetailFilm(string titre, string dateSortie, string realisateur, string synopsis, string chiffreAffaire, 
+            string budget, string langueOri, string noteImdb, List<string> genres)
         {
             InitializeComponent();
+            //Met toutes les données dans les contrôleurs
             tbxTitre.Text = titre;
             tbxDateSortie.Text = dateSortie;
             tbxRealisateur.Text = realisateur;
@@ -28,6 +30,10 @@ namespace Filmap
             tbxBudget.Text = budget;
             tbxLangueOriginale.Text = langueOri;
             tbxNoteIMDB.Text = noteImdb;
+            foreach (string genre in genres)
+            {
+                tbxGenre.Text += genre + Environment.NewLine;
+            }
         }
     }
 }

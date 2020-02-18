@@ -26,10 +26,10 @@ namespace Filmap
 
             foreach (string film in films)
             {
-                lsbFilmTendance.Items.Add(film);    
+                lsbFilmTendance.Items.Add(film);
             }
 
-            
+
         }
 
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
@@ -42,54 +42,64 @@ namespace Filmap
             string noteIMDB = "";
             string chiffreAffaire = "";
             string langueOri = "";
+            List<string> genres = new List<string>();
 
             foreach (string item in films)
             {
                 if (item == lsbFilmTendance.SelectedItem.ToString())
                 {
-                    Console.WriteLine(RecupFilms.RecupIdFilm(item));
 
                     Dictionary<string, object> donnees = RecupFilms.InfosFilmPrecis(RecupFilms.RecupIdFilm(item));
 
                     foreach (KeyValuePair<string, object> donnee in donnees)
                     {
-                        Console.WriteLine("Key : " + donnee.Key + " Value : " + donnee.Value);
-                        if (donnee.Key == "budget")
+                        realisateur = RecupFilms.RecupDirecteur(RecupFilms.RecupIdFilm(item));
+
+                        switch (donnee.Key)
                         {
-                            budget = donnee.Value.ToString();
+                            case "release_date":
+                                dateSortie = donnee.Value.ToString();
+                                break;
+                            case "title":
+                                titre = donnee.Value.ToString();
+                                break;
+                            case "overview":
+                                synopsis = donnee.Value.ToString();
+                                break;
+                            case "vote_average":
+                                noteIMDB = donnee.Value.ToString();
+                                break;
+                            case "budget":
+                                if ((int)donnee.Value > 0)
+                                    budget = donnee.Value.ToString();
+                                else
+                                    budget = "N/C";
+                                break;
+                            case "revenue":
+                                if ((int)donnee.Value > 0)
+                                    chiffreAffaire = donnee.Value.ToString();
+                                else
+                                    chiffreAffaire = "N/C";
+                                break;
+                            case "original_language":
+                                langueOri = donnee.Value.ToString();
+                                langueOri = langueOri.ToUpper();
+                                break;
+                            case "genres":
+                                foreach (Dictionary<string, object> machin in donnee.Value as object[])
+                                {
+                                    genres.Add(machin["name"].ToString());
+                                }
+                                break;
                         }
-                        if (donnee.Key == "release_date")
-                        {
-                            dateSortie = donnee.Value.ToString();
-                        }
-                        if (donnee.Key == "production_companies")
-                        {
-                            //A voir
-                            realisateur = "N/C";
-                        }
-                        if (donnee.Key == "original_title")
-                        {
-                            titre = donnee.Value.ToString();
-                        }
-                        if (donnee.Key == "overview")
-                        {
-                            synopsis = donnee.Value.ToString();
-                        }
-                        if (donnee.Key == "vote_average")
-                        {
-                            noteIMDB = donnee.Value.ToString();
-                        }
-                        if (donnee.Key == "revenue")
-                        {
-                            chiffreAffaire = donnee.Value.ToString();
-                        }
-                        if (donnee.Key == "original_language")
-                        {
-                            langueOri = donnee.Value.ToString();
-                        }
+
+
                     }
 
-                    frmDetailFilm frmDetailFilm = new frmDetailFilm(titre, dateSortie, realisateur, synopsis, chiffreAffaire, budget, langueOri, noteIMDB);
+
+
+                    frmDetailFilm frmDetailFilm = new frmDetailFilm(titre, dateSortie, realisateur, 
+                        synopsis, chiffreAffaire, budget, langueOri, noteIMDB, genres);
                     frmDetailFilm.ShowDialog();
                 }
             }
