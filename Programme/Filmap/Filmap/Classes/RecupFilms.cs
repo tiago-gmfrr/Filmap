@@ -17,12 +17,11 @@ namespace Filmap.Classes
         /// Récupére le nom de tous les films
         /// </summary>
         /// <returns>List de films</returns>
-        public List<string> RecupererFilms()
+        public List<string> RecupererFilmsTendance()
         {
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
-                //Remplacer le numéro de list/xxx pour avoir d'autres films
-
+                webClient.Encoding = Encoding.UTF8;
                 var data = webClient.DownloadString("https://api.themoviedb.org/3/trending/movie/day?api_key=" + API_KEY);
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -49,8 +48,8 @@ namespace Filmap.Classes
             int id = 0;
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
-
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/trending/movie/day?api_key=" + API_KEY);
+                webClient.Encoding = Encoding.UTF8;
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + nomFilm + "&page=1&include_adult=false");
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 
@@ -78,16 +77,15 @@ namespace Filmap.Classes
             Dictionary<string, object> d = new Dictionary<string, object>();
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
-                //Remplacer le numéro de list/xxx pour avoir d'autres films
-                
+                webClient.Encoding = Encoding.UTF8;
                 var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "?api_key=" + API_KEY + "&language=en-US");
-
-                // frmDetailFilm frm = JsonConvert.DeserializeObject<frmDetailFilm>(data);
+                
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 
                 d = jss.Deserialize<dynamic>(data);
 
-                
+
+
             }
             return d;
             
@@ -102,6 +100,7 @@ namespace Filmap.Classes
             string directeur = "";
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
+                webClient.Encoding = Encoding.UTF8;
                 var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "/credits?api_key=" + API_KEY + "&language=en-US");
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -130,6 +129,28 @@ namespace Filmap.Classes
             return directeur;
         }
         
+
+        public List<string> RecupRechercheFilmParNom(string nomFilm)
+        {
+            List<string> filmsCherches = new List<string>();
+            using (System.Net.WebClient webClient = new System.Net.WebClient())
+            {
+                webClient.Encoding = Encoding.UTF8;
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + nomFilm + "&page=1&include_adult=false");
+
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+
+                var d = jss.Deserialize<dynamic>(data);
+
+                foreach (var item in d["results"])
+                {
+                    filmsCherches.Add(item["original_title"]);
+                }
+            }
+
+            return filmsCherches;
+
+        }
 
     }
 }

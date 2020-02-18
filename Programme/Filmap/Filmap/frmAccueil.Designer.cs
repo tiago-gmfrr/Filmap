@@ -163,6 +163,7 @@
             this.MaximizeBox = false;
             this.Name = "frmAccueil";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Bienvenu dans Filmap";
             this.ResumeLayout(false);
             this.PerformLayout();

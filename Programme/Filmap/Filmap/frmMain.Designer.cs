@@ -40,6 +40,7 @@
             this.tbxRecherche.Name = "tbxRecherche";
             this.tbxRecherche.Size = new System.Drawing.Size(254, 20);
             this.tbxRecherche.TabIndex = 0;
+            this.tbxRecherche.TextChanged += new System.EventHandler(this.tbxRecherche_TextChanged);
             // 
             // cmbFiltre
             // 
@@ -90,7 +91,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Filmap";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
