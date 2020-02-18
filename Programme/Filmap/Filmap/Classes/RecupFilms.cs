@@ -10,6 +10,9 @@ namespace Filmap.Classes
 {
     class RecupFilms
     {
+
+        const string API_KEY = "219c3d7d9df2bb83f83cf2582b13a20d";
+
         /// <summary>
         /// Récupére le nom de tous les films
         /// </summary>
@@ -20,7 +23,7 @@ namespace Filmap.Classes
             {
                 //Remplacer le numéro de list/xxx pour avoir d'autres films
 
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/trending/movie/day?api_key=219c3d7d9df2bb83f83cf2582b13a20d");
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/trending/movie/day?api_key=" + API_KEY);
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 
@@ -47,7 +50,7 @@ namespace Filmap.Classes
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
 
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/trending/movie/day?api_key=219c3d7d9df2bb83f83cf2582b13a20d");
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/trending/movie/day?api_key=" + API_KEY);
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 
@@ -77,7 +80,7 @@ namespace Filmap.Classes
             {
                 //Remplacer le numéro de list/xxx pour avoir d'autres films
                 
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "?api_key=219c3d7d9df2bb83f83cf2582b13a20d&language=en-US");
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "?api_key=" + API_KEY + "&language=en-US");
 
                 // frmDetailFilm frm = JsonConvert.DeserializeObject<frmDetailFilm>(data);
                 JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -99,7 +102,7 @@ namespace Filmap.Classes
             string directeur = "";
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "/credits?api_key=219c3d7d9df2bb83f83cf2582b13a20d&language=en-US");
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "/credits?api_key=" + API_KEY + "&language=en-US");
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 

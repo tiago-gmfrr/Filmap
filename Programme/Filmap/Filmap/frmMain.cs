@@ -28,8 +28,6 @@ namespace Filmap
             {
                 lsbFilmTendance.Items.Add(film);
             }
-
-
         }
 
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
@@ -86,14 +84,12 @@ namespace Filmap
                                 langueOri = langueOri.ToUpper();
                                 break;
                             case "genres":
-                                foreach (Dictionary<string, object> machin in donnee.Value as object[])
+                                foreach (Dictionary<string, object> infos in donnee.Value as object[])
                                 {
-                                    genres.Add(machin["name"].ToString());
+                                    genres.Add(infos["name"].ToString());
                                 }
                                 break;
                         }
-
-
                     }
 
 
