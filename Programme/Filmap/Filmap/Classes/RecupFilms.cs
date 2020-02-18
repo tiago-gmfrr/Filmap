@@ -45,11 +45,15 @@ namespace Filmap.Classes
         /// <returns>id</returns>
         public int RecupIdFilm(string nomFilm)
         {
+            if (nomFilm.Contains('é'))
+            {
+                nomFilm.Replace('é', 'e');
+            }
             int id = 0;
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
                 webClient.Encoding = Encoding.UTF8;
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + nomFilm + "&page=1&include_adult=false");
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=fr-FR&query=" + nomFilm + "&page=1&include_adult=false");
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 
@@ -78,14 +82,12 @@ namespace Filmap.Classes
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
                 webClient.Encoding = Encoding.UTF8;
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "?api_key=" + API_KEY + "&language=en-US");
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "?api_key=" + API_KEY + "&language=fr-FR");
                 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 
                 d = jss.Deserialize<dynamic>(data);
-
-
-
+                
             }
             return d;
             
@@ -101,7 +103,7 @@ namespace Filmap.Classes
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
                 webClient.Encoding = Encoding.UTF8;
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "/credits?api_key=" + API_KEY + "&language=en-US");
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "/credits?api_key=" + API_KEY + "&language=fr-FR");
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 
@@ -135,8 +137,9 @@ namespace Filmap.Classes
             List<string> filmsCherches = new List<string>();
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
+                
                 webClient.Encoding = Encoding.UTF8;
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + nomFilm + "&page=1&include_adult=false");
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=fr-FR&query=" + nomFilm + "&page=1&include_adult=false");
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 
@@ -144,7 +147,7 @@ namespace Filmap.Classes
 
                 foreach (var item in d["results"])
                 {
-                    filmsCherches.Add(item["original_title"]);
+                    filmsCherches.Add(item["title"]);
                 }
             }
 

@@ -134,9 +134,9 @@
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(33, 320);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 13);
+            this.label8.Size = new System.Drawing.Size(55, 13);
             this.label8.TabIndex = 7;
-            this.label8.Text = "Genre( s )";
+            this.label8.Text = "Genre(s)";
             // 
             // label9
             // 
