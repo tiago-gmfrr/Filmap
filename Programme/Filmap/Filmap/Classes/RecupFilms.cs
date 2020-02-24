@@ -17,7 +17,7 @@ namespace Filmap.Classes
         /// Récupére le nom de tous les films
         /// </summary>
         /// <returns>List de films</returns>
-        public List<string> RecupererFilmsTendance()
+        public Dictionary<int, string> RecupererFilmsTendance()
         {
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
@@ -28,11 +28,11 @@ namespace Filmap.Classes
 
                 var d = jss.Deserialize<dynamic>(data);
 
-                List<string> titres = new List<string>();
+                Dictionary<int, string> titres = new Dictionary<int, string>();
 
                 foreach (var  item in d["results"])
                 {
-                    titres.Add(item["title"]);
+                    titres.Add(item["id"],item["title"]);
                 }
                 return titres;
             }
@@ -128,9 +128,9 @@ namespace Filmap.Classes
         }
         
 
-        public List<string> RecupRechercheFilmParNom(string nomFilm)
+        public Dictionary<int,string> RecupRechercheFilmParNom(string nomFilm)
         {
-            List<string> filmsCherches = new List<string>();
+            Dictionary<int, string> filmsCherches = new Dictionary<int, string>();
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
                 
@@ -143,7 +143,8 @@ namespace Filmap.Classes
 
                 foreach (var item in d["results"])
                 {
-                    filmsCherches.Add(item["title"]);
+                    
+                    filmsCherches.Add( item["id"], item["title"]);
                 }
             }
 

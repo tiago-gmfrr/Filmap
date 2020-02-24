@@ -13,8 +13,8 @@ namespace Filmap
 {
     public partial class frmMain : Form
     {
-
-        List<string> films = new List<string>();
+        List<dynamic> dynList;
+        Dictionary<int, string> films = new Dictionary<int, string>();
         Classes.RecupFilms RecupFilms = new Classes.RecupFilms();
         public frmMain()
         {
@@ -24,11 +24,15 @@ namespace Filmap
         private void frmMain_Load(object sender, EventArgs e)
         {
             films = RecupFilms.RecupererFilmsTendance();
-
-            foreach (string film in films)
+            dynList = new List<dynamic>();
+            foreach (KeyValuePair<int, string> film in films)
             {
-                lsbFilmTendance.Items.Add(film);
+                dynList.Add(new { Id = film.Key, Name = film.Value });
             }
+
+            lsbFilmTendance.DataSource = dynList;
+            lsbFilmTendance.DisplayMember = "Name";
+            lsbFilmTendance.ValueMember = "Id";
         }
 
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
@@ -36,36 +40,54 @@ namespace Filmap
             AfficherDetailsFilm();
         }
 
-        
+
 
         private void tbxRecherche_TextChanged(object sender, EventArgs e)
         {
             string filmAChercher = string.Empty;
-            lsbFilmTendance.Items.Clear();
+            //lsbFilmTendance.Items.Clear();
             if (tbxRecherche.Text != "")
             {
                 filmAChercher = tbxRecherche.Text;
 
-                List<string> filmsCherches = new List<string>();
+                Dictionary<int, string> filmsCherches = new Dictionary<int, string>();
 
                 filmsCherches = RecupFilms.RecupRechercheFilmParNom(filmAChercher);
-                
-                foreach (string film in filmsCherches)
-                {
-                    if (!films.Contains(film))
-                    {
-                        films.Add(film);
-                    }
 
-                    lsbFilmTendance.Items.Add(film);
+                dynList = new List<dynamic>();
+
+                foreach (KeyValuePair<int, string> film in filmsCherches)
+                {
+                    dynList.Add(new { Id = film.Key, Name = film.Value });
                 }
+
+                lsbFilmTendance.DataSource = dynList;
+                lsbFilmTendance.DisplayMember = "Name";
+                lsbFilmTendance.ValueMember = "Id";
+
+
+                /* foreach (string film in filmsCherches)
+                 {
+                     if (!films.Contains(film))
+                     {
+                         films.Add(film);
+                     }
+
+                     lsbFilmTendance.Items.Add(film);
+                 }*/
             }
             else
             {
-                foreach (string film in films)
+
+                dynList = new List<dynamic>();
+                foreach (KeyValuePair<int, string> film in films)
                 {
-                    lsbFilmTendance.Items.Add(film);
+                    dynList.Add(new { Id = film.Key, Name = film.Value });
                 }
+
+                lsbFilmTendance.DataSource = dynList;
+                lsbFilmTendance.DisplayMember = "Name";
+                lsbFilmTendance.ValueMember = "Id";
             }
         }
 
@@ -85,71 +107,77 @@ namespace Filmap
             Dictionary<string, object> donnees = new Dictionary<string, object>();
 
 
-            foreach (string item in films)
+
+
+            //foreach (string item in films)
+            //{
+            /*if (item == lsbFilmTendance.SelectedValue.ToString())
+            {*/
+            //item == lsbFilmTendance.SelectedValue.ToString();
+            try
             {
-                if (item == lsbFilmTendance.SelectedItem.ToString())
+
+                //int idFilm = RecupFilms.RecupIdFilm(item);
+                int idFilm = (int)lsbFilmTendance.SelectedValue;
+
+                donnees = RecupFilms.InfosFilmPrecis(idFilm);
+
+                foreach (KeyValuePair<string, object> donnee in donnees)
                 {
-                    try
+                    realisateur = RecupFilms.RecupDirecteur(idFilm);
+
+                    switch (donnee.Key)
                     {
-                        int idFilm = RecupFilms.RecupIdFilm(item);
-                        donnees = RecupFilms.InfosFilmPrecis(idFilm);
-
-                        foreach (KeyValuePair<string, object> donnee in donnees)
-                        {
-                            realisateur = RecupFilms.RecupDirecteur(RecupFilms.RecupIdFilm(item));
-
-                            switch (donnee.Key)
+                        case "release_date":
+                            dateSortie = donnee.Value.ToString();
+                            break;
+                        case "title":
+                            titre = donnee.Value.ToString();
+                            break;
+                        case "overview":
+                            synopsis = donnee.Value.ToString();
+                            break;
+                        case "vote_average":
+                            noteIMDB = donnee.Value.ToString();
+                            break;
+                        case "budget":
+                            if (long.Parse(donnee.Value.ToString()) > 0)
+                                budget = donnee.Value.ToString();
+                            else
+                                budget = "N/C";
+                            break;
+                        case "revenue":
+                            if (long.Parse(donnee.Value.ToString()) > 0)
+                                chiffreAffaire = donnee.Value.ToString();
+                            else
+                                chiffreAffaire = "N/C";
+                            break;
+                        case "original_language":
+                            langueOri = donnee.Value.ToString();
+                            langueOri = langueOri.ToUpper();
+                            break;
+                        case "genres":
+                            foreach (Dictionary<string, object> infos in donnee.Value as object[])
                             {
-                                case "release_date":
-                                    dateSortie = donnee.Value.ToString();
-                                    break;
-                                case "title":
-                                    titre = donnee.Value.ToString();
-                                    break;
-                                case "overview":
-                                    synopsis = donnee.Value.ToString();
-                                    break;
-                                case "vote_average":
-                                    noteIMDB = donnee.Value.ToString();
-                                    break;
-                                case "budget":
-                                    if (long.Parse(donnee.Value.ToString()) > 0)
-                                        budget = donnee.Value.ToString();
-                                    else
-                                        budget = "N/C";
-                                    break;
-                                case "revenue":
-                                    if (long.Parse(donnee.Value.ToString()) > 0)
-                                        chiffreAffaire = donnee.Value.ToString();
-                                    else
-                                        chiffreAffaire = "N/C";
-                                    break;
-                                case "original_language":
-                                    langueOri = donnee.Value.ToString();
-                                    langueOri = langueOri.ToUpper();
-                                    break;
-                                case "genres":
-                                    foreach (Dictionary<string, object> infos in donnee.Value as object[])
-                                    {
-                                        genres.Add(infos["name"].ToString());
-                                    }
-                                    break;
+                                genres.Add(infos["name"].ToString());
                             }
-                        }
-                        status = true;
+                            break;
                     }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("Le serveur n'a pas répondu !", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }                    
                 }
+                status = true;
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Le serveur n'a pas répondu !", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            //}
+            //}
             //Vérifie que le code s'est bien éxécuté et affiche la fenêtre de détails
             if (status)
             {
                 frmDetailFilm frmDetailFilm = new frmDetailFilm(titre, dateSortie, realisateur,
                                         synopsis, chiffreAffaire, budget, langueOri, noteIMDB, genres);
-                frmDetailFilm.ShowDialog();
+                frmDetailFilm.Show();
             }
         }
     }
