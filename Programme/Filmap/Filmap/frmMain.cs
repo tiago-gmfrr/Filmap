@@ -16,9 +16,12 @@ namespace Filmap
         List<dynamic> dynList;
         Dictionary<int, string> films = new Dictionary<int, string>();
         Classes.RecupFilms RecupFilms = new Classes.RecupFilms();
-        public frmMain()
+        frmAccueil FrmAccueil;
+
+        public frmMain(frmAccueil frmAccueil)
         {
             InitializeComponent();
+            FrmAccueil = frmAccueil;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -45,7 +48,7 @@ namespace Filmap
         private void tbxRecherche_TextChanged(object sender, EventArgs e)
         {
             string filmAChercher = string.Empty;
-            //lsbFilmTendance.Items.Clear();
+
             if (tbxRecherche.Text != "")
             {
                 filmAChercher = tbxRecherche.Text;
@@ -65,16 +68,7 @@ namespace Filmap
                 lsbFilmTendance.DisplayMember = "Name";
                 lsbFilmTendance.ValueMember = "Id";
 
-
-                /* foreach (string film in filmsCherches)
-                 {
-                     if (!films.Contains(film))
-                     {
-                         films.Add(film);
-                     }
-
-                     lsbFilmTendance.Items.Add(film);
-                 }*/
+                
             }
             else
             {
@@ -105,19 +99,11 @@ namespace Filmap
             string langueOri = "";
             List<string> genres = new List<string>();
             Dictionary<string, object> donnees = new Dictionary<string, object>();
-
-
-
-
-            //foreach (string item in films)
-            //{
-            /*if (item == lsbFilmTendance.SelectedValue.ToString())
-            {*/
-            //item == lsbFilmTendance.SelectedValue.ToString();
+            
+            
             try
             {
-
-                //int idFilm = RecupFilms.RecupIdFilm(item);
+                
                 int idFilm = (int)lsbFilmTendance.SelectedValue;
 
                 donnees = RecupFilms.InfosFilmPrecis(idFilm);
@@ -170,15 +156,19 @@ namespace Filmap
             {
                 MessageBox.Show("Le serveur n'a pas répondu !", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //}
-            //}
             //Vérifie que le code s'est bien éxécuté et affiche la fenêtre de détails
             if (status)
             {
                 frmDetailFilm frmDetailFilm = new frmDetailFilm(titre, dateSortie, realisateur,
                                         synopsis, chiffreAffaire, budget, langueOri, noteIMDB, genres);
                 frmDetailFilm.Show();
+                
             }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FrmAccueil.Visible = true;
         }
     }
 }

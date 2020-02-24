@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Filmap.Classes
 {
-    class RecupFilms
+    public class RecupFilms
     {
 
         const string API_KEY = "219c3d7d9df2bb83f83cf2582b13a20d";

@@ -30,9 +30,10 @@ namespace Filmap
 
         private void btnInvite_Click(object sender, EventArgs e)
         {
-            frmMain frmMain = new frmMain();
+            frmMain frmMain = new frmMain(this);
             
             frmMain.Show();
+            this.Visible = false;
             
         }
     }
