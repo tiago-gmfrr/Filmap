@@ -32,7 +32,17 @@ namespace Filmap
 
         private void btnCreationCompte_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            pseudo = tbxPseudo.Text;
+            email = tbxEmail.Text;
+            motDePasse = tbxMotDePasse.Text;
+            if (pseudo != "" && email != "" && motDePasse != "")
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show("Vous devez remplir tous les champs");
+            }         
         }
     }
 }
