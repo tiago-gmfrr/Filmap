@@ -118,15 +118,11 @@ namespace Filmap
 
         private void btnInvite_Click(object sender, EventArgs e)
         {
-            frmMain frmMain = new frmMain();
+            frmMain frmMain = new frmMain(this);
             
             frmMain.Show();
-            //Application.Exit();
+            this.Visible = false;
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
