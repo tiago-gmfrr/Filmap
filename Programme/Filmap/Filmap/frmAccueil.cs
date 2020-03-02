@@ -22,7 +22,7 @@ namespace Filmap
         private void btnCreationCompte_Click(object sender, EventArgs e)
         {
             //Chaine de connexion
-            string chaineConnexion = "Data Source = ./bdFilmap.sqlite;Version=3";
+            string chaineConnexion = "Data Source = ../../bdFilmap.sqlite;Version=3";
             //Initialisation de la connexion
             SQLiteConnection maConnexion = new SQLiteConnection(chaineConnexion);
 
@@ -72,7 +72,7 @@ namespace Filmap
                 string salt = "";
                 
                 //Chaine de connexion
-                string chaineConnexion = "Data Source = ./bdFilmap.sqlite;Version=3";
+                string chaineConnexion = "Data Source = ../../bdFilmap.sqlite;Version=3";
                 //Initialisation de la connexion
                 SQLiteConnection maConnexion = new SQLiteConnection(chaineConnexion);
 
