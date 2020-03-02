@@ -53,10 +53,7 @@ namespace Filmap.Classes
             string salt = "";
             bool reussi = false;
 
-            //Chaine de connexion
-            string chaineConnexion = "Data Source = ../../bdFilmap.sqlite;Version=3";
-            //Initialisation de la connexion
-            SQLiteConnection maConnexion = new SQLiteConnection(chaineConnexion);
+            
 
             string sql = string.Format("SELECT pseudo, mdp, selMdp FROM Utilisateur WHERE pseudo ='" + pseudo + "'");
             // Affectation de la commande sqlite

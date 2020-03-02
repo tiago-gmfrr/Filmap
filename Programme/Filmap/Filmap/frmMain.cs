@@ -15,7 +15,6 @@ namespace Filmap
     {
         List<dynamic> dynList;
         Dictionary<int, string> films = new Dictionary<int, string>();
-        Classes.RecupFilms RecupFilms = new Classes.RecupFilms();
         frmAccueil FrmAccueil;
 
         public frmMain(frmAccueil frmAccueil)
@@ -26,7 +25,7 @@ namespace Filmap
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            films = RecupFilms.RecupererFilmsTendance();
+            films = Classes.RecupFilms.RecupererFilmsTendance();
             dynList = new List<dynamic>();
             foreach (KeyValuePair<int, string> film in films)
             {
@@ -53,22 +52,11 @@ namespace Filmap
             {
                 filmAChercher = tbxRecherche.Text;
 
-                Dictionary<int, string> filmsCherches = new Dictionary<int, string>();
-
-                filmsCherches = RecupFilms.RecupRechercheFilmParNom(filmAChercher);
-
-                dynList = new List<dynamic>();
-
-                foreach (KeyValuePair<int, string> film in filmsCherches)
-                {
-                    dynList.Add(new { Id = film.Key, Name = film.Value });
-                }
+                Classes.FilmModel.CreationListDynamic(filmAChercher);
 
                 lsbFilmTendance.DataSource = dynList;
                 lsbFilmTendance.DisplayMember = "Name";
                 lsbFilmTendance.ValueMember = "Id";
-
-                
             }
             else
             {
@@ -83,6 +71,11 @@ namespace Filmap
                 lsbFilmTendance.DisplayMember = "Name";
                 lsbFilmTendance.ValueMember = "Id";
             }
+        }
+
+        private void CreationListDynamic(string filmAChercher)
+        {
+            
         }
 
         public void AfficherDetailsFilm()
@@ -106,11 +99,11 @@ namespace Filmap
                 
                 int idFilm = (int)lsbFilmTendance.SelectedValue;
 
-                donnees = RecupFilms.InfosFilmPrecis(idFilm);
+                donnees = Classes.RecupFilms.InfosFilmPrecis(idFilm);
 
                 foreach (KeyValuePair<string, object> donnee in donnees)
                 {
-                    realisateur = RecupFilms.RecupDirecteur(idFilm);
+                    realisateur = Classes.RecupFilms.RecupDirecteur(idFilm);
 
                     switch (donnee.Key)
                     {
