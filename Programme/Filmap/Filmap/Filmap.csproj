@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\dbConnection.cs" />
     <Compile Include="Classes\RecupFilms.cs" />
     <Compile Include="frmDetailFilm.cs">
       <SubType>Form</SubType>
