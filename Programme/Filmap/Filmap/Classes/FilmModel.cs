@@ -74,8 +74,11 @@ namespace Filmap.Classes
 
         public static List<Film> RecupererFilmsTendance()
         {
-
             return Classes.RecupFilms.RecupererFilmsTendance();
+        }
+        public static List<Genres> RecupGenresFilms()
+        {
+            return Classes.RecupFilms.RecupGenreFilms();
         }
 
     }

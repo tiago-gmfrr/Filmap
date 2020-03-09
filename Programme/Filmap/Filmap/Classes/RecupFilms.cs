@@ -183,7 +183,31 @@ namespace Filmap.Classes
             return directeur;
         }
 
+        public static List<Genres> RecupGenreFilms()
+        {
+            List<Genres> listGenre = new List<Genres>();
+            using (System.Net.WebClient webClient = new System.Net.WebClient())
+            {
 
+                webClient.Encoding = Encoding.UTF8;
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/genre/movie/list?api_key=" + API_KEY + "&language=en-US");
+
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+
+                var d = jss.Deserialize<dynamic>(data);
+
+                foreach (var item in d["genres"])
+                {
+
+                    listGenre.Add(new Genres(item["id"], item["name"]));
+                }
+
+
+            }
+
+
+            return listGenre;
+        }
         public static List<Film> RecupRechercheFilmParNom(string nomFilm)
         {
             List<Film> filmsCherches = new List<Film>();

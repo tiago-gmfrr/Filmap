@@ -32,7 +32,7 @@
             this.tbxRecherche = new System.Windows.Forms.TextBox();
             this.cmbFiltre = new System.Windows.Forms.ComboBox();
             this.lsbFilmTendance = new System.Windows.Forms.ListBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbFiltreGenre = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // tbxRecherche
@@ -64,16 +64,14 @@
             this.lsbFilmTendance.TabIndex = 3;
             this.lsbFilmTendance.DoubleClick += new System.EventHandler(this.lsbFilmTendance_DoubleClick);
             // 
-            // comboBox1
+            // cmbFiltreGenre
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Comédie"});
-            this.comboBox1.Location = new System.Drawing.Point(272, 38);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(153, 21);
-            this.comboBox1.TabIndex = 4;
+            this.cmbFiltreGenre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFiltreGenre.FormattingEnabled = true;
+            this.cmbFiltreGenre.Location = new System.Drawing.Point(272, 38);
+            this.cmbFiltreGenre.Name = "cmbFiltreGenre";
+            this.cmbFiltreGenre.Size = new System.Drawing.Size(153, 21);
+            this.cmbFiltreGenre.TabIndex = 4;
             // 
             // frmMain
             // 
@@ -81,7 +79,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Firebrick;
             this.ClientSize = new System.Drawing.Size(437, 343);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbFiltreGenre);
             this.Controls.Add(this.lsbFilmTendance);
             this.Controls.Add(this.cmbFiltre);
             this.Controls.Add(this.tbxRecherche);
@@ -103,6 +101,6 @@
         private System.Windows.Forms.TextBox tbxRecherche;
         private System.Windows.Forms.ComboBox cmbFiltre;
         private System.Windows.Forms.ListBox lsbFilmTendance;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbFiltreGenre;
     }
 }

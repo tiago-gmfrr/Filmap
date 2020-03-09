@@ -15,6 +15,7 @@ namespace Filmap
     public partial class frmMain : Form
     {
         List<Film> films = new List<Film>();
+        List<Genres> genres = new List<Genres>();
         frmAccueil FrmAccueil;
 
         public frmMain(frmAccueil frmAccueil)
@@ -27,6 +28,13 @@ namespace Filmap
         {
             
             films = Classes.FilmModel.RecupererFilmsTendance();
+            genres = Classes.FilmModel.RecupGenresFilms();
+            
+            foreach (var item in genres)
+            {
+                cmbFiltreGenre.Items.Add(item.NameGenre);  
+            }
+
             RefreshListBoxDataSource();
         }
 
