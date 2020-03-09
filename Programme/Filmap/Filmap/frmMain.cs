@@ -14,8 +14,11 @@ namespace Filmap
 {
     public partial class frmMain : Form
     {
+<<<<<<< HEAD
         string genre = "All";
         List<dynamic> dynList;
+=======
+>>>>>>> d34e9ccecc681fe9ffa030adee6b0b25a3228ac7
         List<Film> films = new List<Film>();
         List<Genres> genres = new List<Genres>();
         frmAccueil FrmAccueil;
@@ -29,6 +32,7 @@ namespace Filmap
         private void frmMain_Load(object sender, EventArgs e)
         {
             
+<<<<<<< HEAD
             ListGenres = Classes.RecupFilms.RecupGenreFilms();
             films = Classes.RecupFilms.RecupererFilmsTendance(genre, ListGenres);
 
@@ -36,6 +40,14 @@ namespace Filmap
             {
                 cmbFiltreGenre.Items.Add(item.NomGenre);
             }
+=======
+            films = Classes.FilmModel.RecupererFilmsTendance();
+            RefreshListBoxDataSource();
+        }
+
+        private void RefreshListBoxDataSource()
+        {
+>>>>>>> d34e9ccecc681fe9ffa030adee6b0b25a3228ac7
             lsbFilmTendance.DataSource = films;
             lsbFilmTendance.DisplayMember = "Titre";
             lsbFilmTendance.ValueMember = "IdFilm";
@@ -43,52 +55,19 @@ namespace Filmap
 
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
         {
-            AfficherDetailsFilm();
+            int idFilm = (int)lsbFilmTendance.SelectedValue;
+            Classes.FilmModel.AfficherDetailsFilm(idFilm);
         }
 
 
 
         private void tbxRecherche_TextChanged(object sender, EventArgs e)
         {
-            string filmAChercher = string.Empty;
+            string filmAChercher = tbxRecherche.Text;
 
-            if (tbxRecherche.Text != "")
-            {
-                filmAChercher = tbxRecherche.Text;
+            films = Classes.FilmModel.RechercheFilmParNom(filmAChercher);
 
-                films = Classes.RecupFilms.RecupRechercheFilmParNom(filmAChercher);
-
-                lsbFilmTendance.DataSource = films;
-                lsbFilmTendance.DisplayMember = "Titre";
-                lsbFilmTendance.ValueMember = "IdFilm";
-            }
-            else
-            {
-                
-
-                lsbFilmTendance.DataSource = films;
-                lsbFilmTendance.DisplayMember = "Titre";
-                lsbFilmTendance.ValueMember = "IdFilm";
-            }
-        }
-
-        private void CreationListDynamic(string filmAChercher)
-        {
-
-        }
-
-        public void AfficherDetailsFilm()
-        {
-            int idFilm = (int)lsbFilmTendance.SelectedValue;
-            Film f = Classes.RecupFilms.InfosFilmPrecis(idFilm);
-
-            //Vérifie que le code s'est bien éxécuté et affiche la fenêtre de détails
-            if (f != null)
-            {
-                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Realisateur,
-                                    f.Synopsis, f.ChiffreAffaire, f.Budget, f.LangueOriginale, f.NoteIMDB, f.Genres);
-                frmDetailFilm.Show();
-            }
+            RefreshListBoxDataSource();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
