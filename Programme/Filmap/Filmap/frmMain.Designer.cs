@@ -32,7 +32,10 @@
             this.tbxRecherche = new System.Windows.Forms.TextBox();
             this.cmbFiltre = new System.Windows.Forms.ComboBox();
             this.lsbFilmTendance = new System.Windows.Forms.ListBox();
+<<<<<<< HEAD
             this.cmbFiltreGenre = new System.Windows.Forms.ComboBox();
+=======
+>>>>>>> 091ce2f2e483eccb840a5925acdef091cf7adbd0
             this.SuspendLayout();
             // 
             // tbxRecherche
@@ -48,11 +51,12 @@
             this.cmbFiltre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFiltre.FormattingEnabled = true;
             this.cmbFiltre.Items.AddRange(new object[] {
-            "Recherche de films",
-            "Recherche d\'acteurs"});
+            "Film par nom",
+            "Film par catégorie",
+            "Acteur par nom"});
             this.cmbFiltre.Location = new System.Drawing.Point(272, 11);
             this.cmbFiltre.Name = "cmbFiltre";
-            this.cmbFiltre.Size = new System.Drawing.Size(153, 21);
+            this.cmbFiltre.Size = new System.Drawing.Size(109, 21);
             this.cmbFiltre.TabIndex = 2;
             // 
             // lsbFilmTendance
@@ -64,6 +68,7 @@
             this.lsbFilmTendance.TabIndex = 3;
             this.lsbFilmTendance.DoubleClick += new System.EventHandler(this.lsbFilmTendance_DoubleClick);
             // 
+<<<<<<< HEAD
             // cmbFiltreGenre
             // 
             this.cmbFiltreGenre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -73,13 +78,19 @@
             this.cmbFiltreGenre.Size = new System.Drawing.Size(153, 21);
             this.cmbFiltreGenre.TabIndex = 4;
             // 
+=======
+>>>>>>> 091ce2f2e483eccb840a5925acdef091cf7adbd0
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Firebrick;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(437, 343);
             this.Controls.Add(this.cmbFiltreGenre);
+=======
+            this.ClientSize = new System.Drawing.Size(390, 343);
+>>>>>>> 091ce2f2e483eccb840a5925acdef091cf7adbd0
             this.Controls.Add(this.lsbFilmTendance);
             this.Controls.Add(this.cmbFiltre);
             this.Controls.Add(this.tbxRecherche);
@@ -101,6 +112,9 @@
         private System.Windows.Forms.TextBox tbxRecherche;
         private System.Windows.Forms.ComboBox cmbFiltre;
         private System.Windows.Forms.ListBox lsbFilmTendance;
+<<<<<<< HEAD
         private System.Windows.Forms.ComboBox cmbFiltreGenre;
+=======
+>>>>>>> 091ce2f2e483eccb840a5925acdef091cf7adbd0
     }
 }

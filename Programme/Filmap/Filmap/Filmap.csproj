@@ -88,9 +88,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\dbConnection.cs" />
+<<<<<<< HEAD
     <Compile Include="Classes\Film.cs" />
     <Compile Include="Classes\FilmModel.cs" />
     <Compile Include="Classes\Genres.cs" />
+=======
+>>>>>>> 091ce2f2e483eccb840a5925acdef091cf7adbd0
     <Compile Include="Classes\RecupFilms.cs" />
     <Compile Include="frmDetailFilm.cs">
       <SubType>Form</SubType>
