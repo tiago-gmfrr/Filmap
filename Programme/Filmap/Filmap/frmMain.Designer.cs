@@ -32,6 +32,7 @@
             this.tbxRecherche = new System.Windows.Forms.TextBox();
             this.cmbFiltre = new System.Windows.Forms.ComboBox();
             this.lsbFilmTendance = new System.Windows.Forms.ListBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // tbxRecherche
@@ -47,12 +48,11 @@
             this.cmbFiltre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFiltre.FormattingEnabled = true;
             this.cmbFiltre.Items.AddRange(new object[] {
-            "Film par nom",
-            "Film par catégorie",
-            "Acteur par nom"});
+            "Recherche de films",
+            "Recherche d\'acteurs"});
             this.cmbFiltre.Location = new System.Drawing.Point(272, 11);
             this.cmbFiltre.Name = "cmbFiltre";
-            this.cmbFiltre.Size = new System.Drawing.Size(109, 21);
+            this.cmbFiltre.Size = new System.Drawing.Size(153, 21);
             this.cmbFiltre.TabIndex = 2;
             // 
             // lsbFilmTendance
@@ -64,12 +64,24 @@
             this.lsbFilmTendance.TabIndex = 3;
             this.lsbFilmTendance.DoubleClick += new System.EventHandler(this.lsbFilmTendance_DoubleClick);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Comédie"});
+            this.comboBox1.Location = new System.Drawing.Point(272, 38);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(153, 21);
+            this.comboBox1.TabIndex = 4;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Firebrick;
-            this.ClientSize = new System.Drawing.Size(390, 343);
+            this.ClientSize = new System.Drawing.Size(437, 343);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lsbFilmTendance);
             this.Controls.Add(this.cmbFiltre);
             this.Controls.Add(this.tbxRecherche);
@@ -91,5 +103,6 @@
         private System.Windows.Forms.TextBox tbxRecherche;
         private System.Windows.Forms.ComboBox cmbFiltre;
         private System.Windows.Forms.ListBox lsbFilmTendance;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
