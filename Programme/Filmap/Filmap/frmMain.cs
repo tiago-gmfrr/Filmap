@@ -14,7 +14,6 @@ namespace Filmap
 {
     public partial class frmMain : Form
     {
-        List<dynamic> dynList;
         List<Film> films = new List<Film>();
         frmAccueil FrmAccueil;
 
@@ -26,8 +25,13 @@ namespace Filmap
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            films = Classes.RecupFilms.RecupererFilmsTendance();
+            
+            films = Classes.FilmModel.RecupererFilmsTendance();
+            RefreshListBoxDataSource();
+        }
 
+        private void RefreshListBoxDataSource()
+        {
             lsbFilmTendance.DataSource = films;
             lsbFilmTendance.DisplayMember = "Titre";
             lsbFilmTendance.ValueMember = "IdFilm";
@@ -35,52 +39,19 @@ namespace Filmap
 
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
         {
-            AfficherDetailsFilm();
+            int idFilm = (int)lsbFilmTendance.SelectedValue;
+            Classes.FilmModel.AfficherDetailsFilm(idFilm);
         }
 
 
 
         private void tbxRecherche_TextChanged(object sender, EventArgs e)
         {
-            string filmAChercher = string.Empty;
+            string filmAChercher = tbxRecherche.Text;
 
-            if (tbxRecherche.Text != "")
-            {
-                filmAChercher = tbxRecherche.Text;
+            films = Classes.FilmModel.RechercheFilmParNom(filmAChercher);
 
-                films = Classes.RecupFilms.RecupRechercheFilmParNom(filmAChercher);
-
-                lsbFilmTendance.DataSource = films;
-                lsbFilmTendance.DisplayMember = "Titre";
-                lsbFilmTendance.ValueMember = "IdFilm";
-            }
-            else
-            {
-                
-
-                lsbFilmTendance.DataSource = films;
-                lsbFilmTendance.DisplayMember = "Titre";
-                lsbFilmTendance.ValueMember = "IdFilm";
-            }
-        }
-
-        private void CreationListDynamic(string filmAChercher)
-        {
-
-        }
-
-        public void AfficherDetailsFilm()
-        {
-            int idFilm = (int)lsbFilmTendance.SelectedValue;
-            Film f = Classes.RecupFilms.InfosFilmPrecis(idFilm);
-
-            //Vérifie que le code s'est bien éxécuté et affiche la fenêtre de détails
-            if (f != null)
-            {
-                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Realisateur,
-                                    f.Synopsis, f.ChiffreAffaire, f.Budget, f.LangueOriginale, f.NoteIMDB, f.Genres);
-                frmDetailFilm.Show();
-            }
+            RefreshListBoxDataSource();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
