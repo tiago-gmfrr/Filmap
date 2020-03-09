@@ -14,8 +14,10 @@ namespace Filmap
 {
     public partial class frmMain : Form
     {
+        string genre = "All";
         List<dynamic> dynList;
         List<Film> films = new List<Film>();
+        List<Genres> genres = new List<Genres>();
         frmAccueil FrmAccueil;
 
         public frmMain(frmAccueil frmAccueil)
@@ -26,8 +28,14 @@ namespace Filmap
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            films = Classes.RecupFilms.RecupererFilmsTendance();
+            
+            ListGenres = Classes.RecupFilms.RecupGenreFilms();
+            films = Classes.RecupFilms.RecupererFilmsTendance(genre, ListGenres);
 
+            foreach (var item in genres)
+            {
+                cmbFiltreGenre.Items.Add(item.NomGenre);
+            }
             lsbFilmTendance.DataSource = films;
             lsbFilmTendance.DisplayMember = "Titre";
             lsbFilmTendance.ValueMember = "IdFilm";
@@ -86,6 +94,11 @@ namespace Filmap
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             FrmAccueil.Visible = true;
+        }
+
+        private void cmbFiltreGenre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            genre = cmbFiltreGenre.SelectedItem.ToString();
         }
     }
 }

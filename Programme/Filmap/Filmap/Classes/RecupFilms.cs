@@ -17,7 +17,7 @@ namespace Filmap.Classes
         /// Récupére le nom de tous les films
         /// </summary>
         /// <returns>List de films</returns>
-        public static List<Film> RecupererFilmsTendance()
+        public static List<Film> RecupererFilmsTendance(string genre)
         {
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
@@ -32,7 +32,11 @@ namespace Filmap.Classes
 
                 foreach (var item in d["results"])
                 {
-                    filmsTendance.Add(new Film(item["id"], item["title"]));
+                    if (genre == "All")
+                    {
+                        filmsTendance.Add(new Film(item["id"], item["title"]));
+                    }
+                    
                 }
                 return filmsTendance;
             }
@@ -183,7 +187,31 @@ namespace Filmap.Classes
             return directeur;
         }
 
+        public static List<Genres> RecupGenreFilms() {
 
+            List<Genres> listGenres = new List<Genres>();
+
+            using (System.Net.WebClient webClient = new System.Net.WebClient())
+            {
+
+                webClient.Encoding = Encoding.UTF8;
+                var data = webClient.DownloadString("https://api.themoviedb.org/3/genre/movie/list?api_key=" + API_KEY + "&language=en-US");
+
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+
+                var d = jss.Deserialize<dynamic>(data);
+
+                foreach (var item in d["genres"])
+                {
+
+                    listGenres.Add(new Genres(item["id"], item["name"]));
+                }
+
+
+            }
+
+            return listGenres;
+        }
         public static List<Film> RecupRechercheFilmParNom(string nomFilm)
         {
             List<Film> filmsCherches = new List<Film>();
