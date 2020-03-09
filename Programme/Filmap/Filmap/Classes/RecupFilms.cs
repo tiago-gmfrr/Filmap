@@ -17,7 +17,7 @@ namespace Filmap.Classes
         /// Récupére le nom de tous les films
         /// </summary>
         /// <returns>List de films</returns>
-        public static Dictionary<int, string> RecupererFilmsTendance()
+        public static List<Film> RecupererFilmsTendance()
         {
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
@@ -28,15 +28,16 @@ namespace Filmap.Classes
 
                 var d = jss.Deserialize<dynamic>(data);
 
-                Dictionary<int, string> titres = new Dictionary<int, string>();
+                List<Film> filmsTendance = new List<Film>();
 
-                foreach (var  item in d["results"])
+                foreach (var item in d["results"])
                 {
-                    titres.Add(item["id"],item["title"]);
+                    filmsTendance.Add(new Film(item["id"], item["title"]));
                 }
-                return titres;
+                return filmsTendance;
             }
         }
+
 
         /// <summary>
         /// Récupére l'id du film
@@ -72,22 +73,81 @@ namespace Filmap.Classes
         /// </summary>
         /// <param name="idFilm">idFilm</param>
         /// <returns>Dictionnaire string, object</returns>
-        public static Dictionary<string, object> InfosFilmPrecis(int idFilm)
+        public static Film InfosFilmPrecis(int idFilm)
         {
-            Dictionary<string, object> d = new Dictionary<string, object>();
+            Dictionary<string, object> donnees = new Dictionary<string, object>();
+            Film film;
+
+
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
                 webClient.Encoding = Encoding.UTF8;
                 var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "?api_key=" + API_KEY + "&language=en-US");
-                
+
                 JavaScriptSerializer jss = new JavaScriptSerializer();
 
-                d = jss.Deserialize<dynamic>(data);
-                
+                donnees = jss.Deserialize<dynamic>(data);
+
+                string titre = "";
+                string dateSortie = "";
+                string realisateur = "";
+                string synopsis = "";
+                string budget = "";
+                string noteIMDB = "";
+                string chiffreAffaire = "";
+                string langueOriginal = "";
+                List<string> genres = new List<string>();
+
+                foreach (KeyValuePair<string, object> donnee in donnees)
+                {
+                    realisateur = RecupDirecteur(idFilm);
+
+                    switch (donnee.Key)
+                    {
+                        case "release_date":
+                            dateSortie = donnee.Value.ToString();
+                            break;
+                        case "title":
+                            titre = donnee.Value.ToString();
+                            break;
+                        case "overview":
+                            synopsis = donnee.Value.ToString();
+                            break;
+                        case "vote_average":
+                            noteIMDB = donnee.Value.ToString();
+                            break;
+                        case "budget":
+                            if (long.Parse(donnee.Value.ToString()) > 0)
+                                budget = donnee.Value.ToString();
+                            else
+                                budget = "N/C";
+                            break;
+                        case "revenue":
+                            if (long.Parse(donnee.Value.ToString()) > 0)
+                                chiffreAffaire = donnee.Value.ToString();
+                            else
+                                chiffreAffaire = "N/C";
+                            break;
+                        case "original_language":
+                            langueOriginal = donnee.Value.ToString();
+                            langueOriginal = langueOriginal.ToUpper();
+                            break;
+                        case "genres":
+                            foreach (Dictionary<string, object> infos in donnee.Value as object[])
+                            {
+                                genres.Add(infos["name"].ToString());
+                            }
+                            break;
+                    }
+                }
+
+                film = new Film(idFilm, titre, synopsis, noteIMDB, budget, chiffreAffaire, langueOriginal, genres, realisateur, dateSortie);
             }
-            return d;
-            
+
+            return film;
+
         }
+
         /// <summary>
         /// Récupére le directeur du film
         /// </summary>
@@ -102,7 +162,7 @@ namespace Filmap.Classes
                 var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "/credits?api_key=" + API_KEY + "&language=en-US");
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
-                
+
                 var d = jss.Deserialize<dynamic>(data);
 
                 foreach (var item in d["crew"])
@@ -114,22 +174,22 @@ namespace Filmap.Classes
                             if (job.Value.ToString() == "Director")
                             {
                                 directeur = item["name"];
-                            }                            
-                        }                        
+                            }
+                        }
                     }
                 }
             }
 
             return directeur;
         }
-        
 
-        public static Dictionary<int,string> RecupRechercheFilmParNom(string nomFilm)
+
+        public static List<Film> RecupRechercheFilmParNom(string nomFilm)
         {
-            Dictionary<int, string> filmsCherches = new Dictionary<int, string>();
+            List<Film> filmsCherches = new List<Film>();
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
-                
+
                 webClient.Encoding = Encoding.UTF8;
                 var data = webClient.DownloadString("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + nomFilm + "&page=1&include_adult=false");
 
@@ -139,8 +199,8 @@ namespace Filmap.Classes
 
                 foreach (var item in d["results"])
                 {
-                    
-                    filmsCherches.Add( item["id"], item["title"]);
+
+                    filmsCherches.Add(new Film(item["id"], item["title"]));
                 }
             }
 

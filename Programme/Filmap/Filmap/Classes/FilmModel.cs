@@ -7,24 +7,50 @@ using System.Threading.Tasks;
 namespace Filmap.Classes
 {
     class FilmModel
-    {        
+    {
 
-        public static List<dynamic> CreationListDynamic(string filmAChercher)
+
+        public static void CreationCompte()
         {
-            Dictionary<int, string> filmsCherches = new Dictionary<int, string>();
+            string pseudo = "";
+            string email = "";
+            string mdp = "";
 
-            filmsCherches = Classes.RecupFilms.RecupRechercheFilmParNom(filmAChercher);
+            frmCreationCompte signupForm = new frmCreationCompte();
+            signupForm.ShowDialog();
 
-            List<dynamic> dynList = new List<dynamic>();
+            pseudo = signupForm.Pseudo;
+            email = signupForm.Email;
+            mdp = signupForm.MotDePasse;
 
-            foreach (KeyValuePair<int, string> film in filmsCherches)
-            {
-                dynList.Add(new { Id = film.Key, Name = film.Value });
-            }
-
-            return dynList;
+            Classes.dbConnection.AjouterUser(pseudo, email, mdp);
         }
 
-        
+        public static string Connection(string pseudo, string mdp)
+        {
+            string erreur = string.Empty;
+            if (pseudo != "" && mdp != "")
+            {
+                erreur = "Tous les champs ne sont pas remplis.";
+            }
+            else
+            {
+                if (!Classes.dbConnection.Connection(pseudo, mdp))
+                {
+                    erreur = "Le pseudo ou le mot de passe est erroné";
+                }
+            }
+
+            return erreur;
+
+        }
+
+        public static void ModeInvite(frmAccueil fa)
+        {
+            frmMain frmMain = new frmMain(fa);
+
+            frmMain.Show();
+        }
+
     }
 }

@@ -21,18 +21,8 @@ namespace Filmap
 
         private void btnCreationCompte_Click(object sender, EventArgs e)
         {
+            Classes.FilmModel.CreationCompte();
 
-            string pseudo = "";
-            string email = "";
-            string mdp = "";
-            frmCreationCompte signupForm = new frmCreationCompte();
-            signupForm.ShowDialog();
-
-            pseudo = signupForm.Pseudo;
-            email = signupForm.Email;
-            mdp = signupForm.MotDePasse;
-
-            Classes.dbConnection.AjouterUser(pseudo, email, mdp);
         }
 
         private void btnConnection_Click(object sender, EventArgs e)
@@ -40,30 +30,18 @@ namespace Filmap
 
             string pseudo = tbxPseudo.Text;
             string mdp = tbxMotDePasse.Text;
+            string erreur = Classes.FilmModel.Connection(pseudo, mdp);
 
-            if (pseudo != "" && mdp != "")
+            if (erreur != string.Empty)
             {
-                if (Classes.dbConnection.Connection(pseudo, mdp))
-                {
-                    MessageBox.Show("gg mec");
-                }
-                else
-                {
-                    MessageBox.Show("Le pseudo ou le mot de passe est erroné");
-                    tbxMotDePasse.Text = "";
-                }
+                MessageBox.Show(erreur);
             }
-            else
-            {
-                MessageBox.Show("Veuillez remplir tous les champs");
-            }
+
         }
 
         private void btnInvite_Click(object sender, EventArgs e)
         {
-            frmMain frmMain = new frmMain(this);
-
-            frmMain.Show();
+            Classes.FilmModel.ModeInvite(this);
             this.Visible = false;
         }
 

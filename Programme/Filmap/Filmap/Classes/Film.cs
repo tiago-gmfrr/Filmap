@@ -6,26 +6,29 @@ using System.Threading.Tasks;
 
 namespace Filmap.Classes
 {
-    class Film
+    public class Film
     {
         private int _idFilm;
         private string _titre;
         private string _synopsis;
-        private int _note;
-        private long _budget;
-        private long _revenus;
+        private string _noteIMDB;
+        private string _budget;
+        private string _chiffreAffaire;
         private string _langueOriginale;
         private List<string> _genres;
+        private string _realisateur;
+        private string _dateSortie;
 
-        public int IdFilm { get => _idFilm; set => _idFilm = value; }
-        public string Titre { get => _titre; set => _titre = value; }
-        public string Synopsis { get => _synopsis; set => _synopsis = value; }
-        public int Note { get => _note; set => _note = value; }
-        public long Budget { get => _budget; set => _budget = value; }
-        public long Revenus { get => _revenus; set => _revenus = value; }
-        public string LangueOriginale { get => _langueOriginale; set => _langueOriginale = value; }
-        public List<string> Genres { get => _genres; set => _genres = value; }
-
+        public int IdFilm { get => _idFilm; private set => _idFilm = value; }
+        public string Titre { get => _titre; private set => _titre = value; }
+        public string Synopsis { get => _synopsis; private set => _synopsis = value; }
+        public string NoteIMDB { get => _noteIMDB; private set => _noteIMDB = value; }
+        public string Budget { get => _budget; private set => _budget = value; }
+        public string ChiffreAffaire { get => _chiffreAffaire; private set => _chiffreAffaire = value; }
+        public string LangueOriginale { get => _langueOriginale; private set => _langueOriginale = value; }
+        public List<string> Genres { get => _genres; private set => _genres = value; }
+        public string Realisateur { get => _realisateur; set => _realisateur = value; }
+        public string DateSortie { get => _dateSortie; set => _dateSortie = value; }
 
         public Film(int idFilm, string titre)
         {
@@ -33,17 +36,18 @@ namespace Filmap.Classes
             Titre = titre;
         }
 
-        public Film(int idFilm, string titre, string synopsis, int note, long budget, long revenus, string langueOriginale, List<string> genres)
+        public Film(int idFilm, string titre, string synopsis, string noteIMDB, string budget, string chiffreAffaire, string langueOriginale, List<string> genres, string realisateur, string dateSortie)
         {
             IdFilm = idFilm;
             Titre = titre;
             Synopsis = synopsis;
-            Note = note;
+            NoteIMDB = noteIMDB;
             Budget = budget;
-            Revenus = revenus;
+            ChiffreAffaire = chiffreAffaire;
             LangueOriginale = langueOriginale;
             Genres = genres;
-
+            Realisateur = realisateur;
+            DateSortie = dateSortie;
         }
     }
 }
