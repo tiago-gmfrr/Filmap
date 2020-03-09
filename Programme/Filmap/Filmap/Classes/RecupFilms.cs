@@ -17,7 +17,7 @@ namespace Filmap.Classes
         /// Récupére le nom de tous les films
         /// </summary>
         /// <returns>List de films</returns>
-        public Dictionary<int, string> RecupererFilmsTendance()
+        public static Dictionary<int, string> RecupererFilmsTendance()
         {
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
@@ -43,7 +43,7 @@ namespace Filmap.Classes
         /// </summary>
         /// <param name="nomFilm">Nom du film</param>
         /// <returns>id</returns>
-        public int RecupIdFilm(string nomFilm)
+        public static int RecupIdFilm(string nomFilm)
         {
             int id = 0;
             using (System.Net.WebClient webClient = new System.Net.WebClient())
@@ -72,7 +72,7 @@ namespace Filmap.Classes
         /// </summary>
         /// <param name="idFilm">idFilm</param>
         /// <returns>Dictionnaire string, object</returns>
-        public Dictionary<string, object> InfosFilmPrecis(int idFilm)
+        public static Dictionary<string, object> InfosFilmPrecis(int idFilm)
         {
             Dictionary<string, object> d = new Dictionary<string, object>();
             using (System.Net.WebClient webClient = new System.Net.WebClient())
@@ -93,7 +93,7 @@ namespace Filmap.Classes
         /// </summary>
         /// <param name="idFilm">Id du film</param>
         /// <returns>Nom directeur</returns>
-        public string RecupDirecteur(int idFilm)
+        public static string RecupDirecteur(int idFilm)
         {
             string directeur = "";
             using (System.Net.WebClient webClient = new System.Net.WebClient())
@@ -102,33 +102,29 @@ namespace Filmap.Classes
                 var data = webClient.DownloadString("https://api.themoviedb.org/3/movie/" + idFilm + "/credits?api_key=" + API_KEY + "&language=en-US");
 
                 JavaScriptSerializer jss = new JavaScriptSerializer();
-
+                
                 var d = jss.Deserialize<dynamic>(data);
 
                 foreach (var item in d["crew"])
                 {
                     foreach (KeyValuePair<string, object> job in item)
                     {
-
                         if (job.Key == "job")
                         {
                             if (job.Value.ToString() == "Director")
                             {
                                 directeur = item["name"];
-                            }
-                            
-                        }
-                        
+                            }                            
+                        }                        
                     }
                 }
-
-
             }
+
             return directeur;
         }
         
 
-        public Dictionary<int,string> RecupRechercheFilmParNom(string nomFilm)
+        public static Dictionary<int,string> RecupRechercheFilmParNom(string nomFilm)
         {
             Dictionary<int, string> filmsCherches = new Dictionary<int, string>();
             using (System.Net.WebClient webClient = new System.Net.WebClient())
