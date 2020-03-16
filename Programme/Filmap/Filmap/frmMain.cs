@@ -1,4 +1,4 @@
-﻿using Filmap.Classes;
+﻿using Filmap.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,8 +31,8 @@ namespace Filmap
         private void frmMain_Load(object sender, EventArgs e)
         {
             
-            films = Classes.FilmModel.RecupererFilmsTendance();
-            genres = Classes.FilmModel.RecupGenresFilms();
+            films = Models.FilmModel.RecupererFilmsTendance();
+            genres = Models.FilmModel.RecupGenresFilms();
             
             foreach (var item in genres)
             {
@@ -52,7 +52,7 @@ namespace Filmap
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
         {
             int idFilm = (int)lsbFilmTendance.SelectedValue;
-            Classes.FilmModel.AfficherDetailsFilm(idFilm);
+            Models.FilmModel.AfficherDetailsFilm(idFilm);
         }
 
 
@@ -61,7 +61,7 @@ namespace Filmap
         {
             string filmAChercher = tbxRecherche.Text;
 
-            films = Classes.FilmModel.RechercheFilmParNom(filmAChercher);
+            films = Models.FilmModel.RechercheFilmParNom(filmAChercher);
 
             RefreshListBoxDataSource();
         }

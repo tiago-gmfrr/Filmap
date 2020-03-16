@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Filmap.Classes
+namespace Filmap.Models
 {
     public class Film
     {

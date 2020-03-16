@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 
-namespace Filmap.Classes
+namespace Filmap.Models
 {
     public class RecupFilms
     {
@@ -38,35 +38,6 @@ namespace Filmap.Classes
             }
         }
 
-
-        /// <summary>
-        /// Récupére l'id du film
-        /// </summary>
-        /// <param name="nomFilm">Nom du film</param>
-        /// <returns>id</returns>
-        public static int RecupIdFilm(string nomFilm)
-        {
-            int id = 0;
-            using (System.Net.WebClient webClient = new System.Net.WebClient())
-            {
-                webClient.Encoding = Encoding.UTF8;
-                var data = webClient.DownloadString("https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + nomFilm + "&page=1&include_adult=false");
-
-                JavaScriptSerializer jss = new JavaScriptSerializer();
-
-                var d = jss.Deserialize<dynamic>(data);
-                //Parcoure tous 
-                foreach (var item in d["results"])
-                {
-                    if (nomFilm == item["title"])
-                    {
-                        id = item["id"];
-                    }
-                }
-            }
-
-            return id;
-        }
 
         /// <summary>
         /// Récupére toutes les infos du film

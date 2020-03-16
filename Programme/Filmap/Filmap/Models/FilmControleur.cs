@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Filmap.Classes
+namespace Filmap.Models
 {
-    class FilmModel
+    class FilmControleur
     {
 
 
@@ -23,7 +23,7 @@ namespace Filmap.Classes
             email = signupForm.Email;
             mdp = signupForm.MotDePasse;
 
-            Classes.dbConnection.AjouterUser(pseudo, email, mdp);
+            dbConnection.AjouterUser(pseudo, email, mdp);
         }
 
         public static string Connection(string pseudo, string mdp)
@@ -35,7 +35,7 @@ namespace Filmap.Classes
             }
             else
             {
-                if (!Classes.dbConnection.Connection(pseudo, mdp))
+                if (!dbConnection.Connection(pseudo, mdp))
                 {
                     erreur = "Le pseudo ou le mot de passe est erroné";
                 }
@@ -54,7 +54,7 @@ namespace Filmap.Classes
 
         public static void AfficherDetailsFilm(int idFilm)
         {
-            Film f = Classes.RecupFilms.InfosFilmPrecis(idFilm);
+            Film f = RecupFilms.InfosFilmPrecis(idFilm);
 
             //Vérifie que le code s'est bien éxécuté et affiche la fenêtre de détails
             if (f != null)
@@ -67,18 +67,25 @@ namespace Filmap.Classes
 
         public static List<Film> RechercheFilmParNom(string filmAChercher)
         {
-
-             return Classes.RecupFilms.RecupRechercheFilmParNom(filmAChercher);
-
+            List<Film> filmsAAfficher = new List<Film>();
+            if (filmAChercher != string.Empty)
+            {
+                filmsAAfficher = RecupFilms.RecupRechercheFilmParNom(filmAChercher);
+            }
+            else
+            {
+                filmsAAfficher = RecupFilms.RecupererFilmsTendance();
+            }
+            return filmsAAfficher;
         }
 
         public static List<Film> RecupererFilmsTendance()
         {
-            return Classes.RecupFilms.RecupererFilmsTendance();
+            return RecupFilms.RecupererFilmsTendance();
         }
         public static List<Genre> RecupGenresFilms()
         {
-            return Classes.RecupFilms.RecupGenreFilms();
+            return RecupFilms.RecupGenreFilms();
         }
 
     }
