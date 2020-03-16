@@ -183,9 +183,9 @@ namespace Filmap.Classes
             return directeur;
         }
 
-        public static List<Genres> RecupGenreFilms()
+        public static List<Genre> RecupGenreFilms()
         {
-            List<Genres> listGenre = new List<Genres>();
+            List<Genre> listGenre = new List<Genre>();
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
 
@@ -199,7 +199,7 @@ namespace Filmap.Classes
                 foreach (var item in d["genres"])
                 {
 
-                    listGenre.Add(new Genres(item["id"], item["name"]));
+                    listGenre.Add(new Genre(item["id"], item["name"]));
                 }
 
 

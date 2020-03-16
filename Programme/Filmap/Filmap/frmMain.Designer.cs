@@ -54,6 +54,7 @@
             this.cmbFiltre.Name = "cmbFiltre";
             this.cmbFiltre.Size = new System.Drawing.Size(153, 21);
             this.cmbFiltre.TabIndex = 2;
+            this.cmbFiltre.SelectedIndexChanged += new System.EventHandler(this.cmbFiltre_SelectedIndexChanged);
             // 
             // lsbFilmTendance
             // 
@@ -68,6 +69,8 @@
             // 
             this.cmbFiltreGenre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFiltreGenre.FormattingEnabled = true;
+            this.cmbFiltreGenre.Items.AddRange(new object[] {
+            "Pas de filtre "});
             this.cmbFiltreGenre.Location = new System.Drawing.Point(272, 38);
             this.cmbFiltreGenre.Name = "cmbFiltreGenre";
             this.cmbFiltreGenre.Size = new System.Drawing.Size(153, 21);

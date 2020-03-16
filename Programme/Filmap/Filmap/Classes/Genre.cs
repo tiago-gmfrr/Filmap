@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Filmap.Classes
 {
-    public class Genres
+    public class Genre
     {
         private int _idGenre;
         private string _nameGenre;
@@ -14,7 +14,7 @@ namespace Filmap.Classes
         public int IdGenre { get => _idGenre; set => _idGenre = value; }
         public string NameGenre { get => _nameGenre; set => _nameGenre = value; }
 
-        public Genres(int idGenre, string nameGenre)
+        public Genre(int idGenre, string nameGenre)
         {
             _idGenre = idGenre;
             _nameGenre = nameGenre;

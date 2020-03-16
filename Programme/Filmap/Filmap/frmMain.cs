@@ -15,7 +15,7 @@ namespace Filmap
     public partial class frmMain : Form
     {
         List<Film> films = new List<Film>();
-        List<Genres> genres = new List<Genres>();
+        List<Genre> genres = new List<Genre>();
         frmAccueil FrmAccueil;
 
         public frmMain(frmAccueil frmAccueil)
@@ -65,6 +65,18 @@ namespace Filmap
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             FrmAccueil.Visible = true;
+        }
+
+        private void cmbFiltre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbFiltre.SelectedItem.ToString() == "Recherche d'acteurs")
+            {
+                cmbFiltreGenre.Enabled = false;
+            }
+            else
+            {
+                cmbFiltreGenre.Enabled = true;
+            }
         }
     }
 }
