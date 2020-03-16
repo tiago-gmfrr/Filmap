@@ -21,7 +21,7 @@ namespace Filmap
 
         private void btnCreationCompte_Click(object sender, EventArgs e)
         {
-            Models.FilmModel.CreationCompte();
+            Models.FilmControleur.CreationCompte();
 
         }
 
@@ -30,7 +30,7 @@ namespace Filmap
 
             string pseudo = tbxPseudo.Text;
             string mdp = tbxMotDePasse.Text;
-            string erreur = Models.FilmModel.Connection(pseudo, mdp);
+            string erreur = Models.FilmControleur.Connection(pseudo, mdp);
 
             if (erreur != string.Empty)
             {
@@ -41,7 +41,7 @@ namespace Filmap
 
         private void btnInvite_Click(object sender, EventArgs e)
         {
-            Models.FilmModel.ModeInvite(this);
+            Models.FilmControleur.ModeInvite(this);
             this.Visible = false;
         }
 

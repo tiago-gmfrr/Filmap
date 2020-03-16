@@ -59,7 +59,7 @@ namespace Filmap.Models
             //Vérifie que le code s'est bien éxécuté et affiche la fenêtre de détails
             if (f != null)
             {
-                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Realisateur,
+                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Directeur,
                                     f.Synopsis, f.ChiffreAffaire, f.Budget, f.LangueOriginale, f.NoteIMDB, f.Genres);
                 frmDetailFilm.Show();
             }
