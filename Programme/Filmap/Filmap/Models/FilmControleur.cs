@@ -29,7 +29,7 @@ namespace Filmap.Models
         public static string Connection(string pseudo, string mdp)
         {
             string erreur = string.Empty;
-            if (pseudo != "" && mdp != "")
+            if (pseudo == "" || mdp == "")
             {
                 erreur = "Tous les champs ne sont pas remplis.";
             }
