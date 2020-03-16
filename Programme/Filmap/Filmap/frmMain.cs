@@ -31,8 +31,8 @@ namespace Filmap
         private void frmMain_Load(object sender, EventArgs e)
         {
             
-            films = Models.FilmModel.RecupererFilmsTendance();
-            genres = Models.FilmModel.RecupGenresFilms();
+            films = Models.FilmControleur.RecupererFilmsTendance();
+            genres = Models.FilmControleur.RecupGenresFilms();
             
             foreach (var item in genres)
             {
@@ -52,7 +52,7 @@ namespace Filmap
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
         {
             int idFilm = (int)lsbFilmTendance.SelectedValue;
-            Models.FilmModel.AfficherDetailsFilm(idFilm);
+            Models.FilmControleur.AfficherDetailsFilm(idFilm);
         }
 
 
@@ -61,7 +61,7 @@ namespace Filmap
         {
             string filmAChercher = tbxRecherche.Text;
 
-            films = Models.FilmModel.RechercheFilmParNom(filmAChercher);
+            films = Models.FilmControleur.RechercheFilmParNom(filmAChercher);
 
             RefreshListBoxDataSource();
         }

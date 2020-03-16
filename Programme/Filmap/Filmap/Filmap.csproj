@@ -89,7 +89,7 @@
   <ItemGroup>
     <Compile Include="Models\dbConnection.cs" />
     <Compile Include="Models\Film.cs" />
-    <Compile Include="Models\FilmModel.cs" />
+    <Compile Include="Models\FilmControleur.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\RecupFilms.cs" />
     <Compile Include="frmDetailFilm.cs">
