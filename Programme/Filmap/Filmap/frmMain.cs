@@ -14,9 +14,13 @@ namespace Filmap
 {
     public partial class frmMain : Form
     {
+        private string filtreGenre = "";
+
         List<Film> films = new List<Film>();
         List<Genre> genres = new List<Genre>();
         frmAccueil FrmAccueil;
+
+        public string FiltreGenre { get => filtreGenre; set => filtreGenre = value; }
 
         public frmMain(frmAccueil frmAccueil)
         {
@@ -77,6 +81,12 @@ namespace Filmap
             {
                 cmbFiltreGenre.Enabled = true;
             }
+        }
+
+        private void cmbFiltreGenre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FiltreGenre = cmbFiltreGenre.SelectedItem.ToString();
+            
         }
     }
 }

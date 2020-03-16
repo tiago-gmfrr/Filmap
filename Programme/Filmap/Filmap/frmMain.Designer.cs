@@ -75,6 +75,7 @@
             this.cmbFiltreGenre.Name = "cmbFiltreGenre";
             this.cmbFiltreGenre.Size = new System.Drawing.Size(153, 21);
             this.cmbFiltreGenre.TabIndex = 4;
+            this.cmbFiltreGenre.SelectedIndexChanged += new System.EventHandler(this.cmbFiltreGenre_SelectedIndexChanged);
             // 
             // frmMain
             // 
