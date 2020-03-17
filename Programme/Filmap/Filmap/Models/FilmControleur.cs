@@ -47,7 +47,14 @@ namespace Filmap.Models
 
         public static void ModeInvite(frmAccueil fa)
         {
-            frmMain frmMain = new frmMain(fa);
+            frmMain frmMain = new frmMain(fa, "");
+
+            frmMain.Show();
+        }
+        public static void ModeConnecte(frmAccueil fa, string pseudo)
+        {
+            
+            frmMain frmMain = new frmMain(fa, pseudo);
 
             frmMain.Show();
         }
@@ -59,29 +66,29 @@ namespace Filmap.Models
             //Vérifie que le code s'est bien éxécuté et affiche la fenêtre de détails
             if (f != null)
             {
-                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Directeur,
+                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Realisateur,
                                     f.Synopsis, f.ChiffreAffaire, f.Budget, f.LangueOriginale, f.NoteIMDB, f.Genres);
                 frmDetailFilm.Show();
             }
         }
 
-        public static List<Film> RechercheFilmParNom(string filmAChercher)
+        public static List<Film> RechercheFilmParNom(string filmAChercher, string filtreGenre)
         {
             List<Film> filmsAAfficher = new List<Film>();
             if (filmAChercher != string.Empty)
             {
-                filmsAAfficher = RecupFilms.RecupRechercheFilmParNom(filmAChercher);
+                filmsAAfficher = RecupFilms.RecupRechercheFilmParNom(filmAChercher, filtreGenre);
             }
             else
             {
-                filmsAAfficher = RecupFilms.RecupererFilmsTendance();
+                filmsAAfficher = RecupFilms.RecupererFilmsTendance(filtreGenre);
             }
             return filmsAAfficher;
         }
 
-        public static List<Film> RecupererFilmsTendance()
+        public static List<Film> RecupererFilmsTendance(string filtreGenre)
         {
-            return RecupFilms.RecupererFilmsTendance();
+            return RecupFilms.RecupererFilmsTendance(filtreGenre);
         }
         public static List<Genre> RecupGenresFilms()
         {

@@ -36,6 +36,13 @@ namespace Filmap
             {
                 MessageBox.Show(erreur);
             }
+            else
+            {
+                Models.FilmControleur.ModeConnecte(this, pseudo);
+                tbxMotDePasse.Text = "";
+                tbxPseudo.Text = "";
+                this.Visible = false;
+            }
 
         }
 

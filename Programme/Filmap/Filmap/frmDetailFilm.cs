@@ -18,7 +18,7 @@ namespace Filmap
         }
 
         public frmDetailFilm(string titre, string dateSortie, string realisateur, string synopsis, string chiffreAffaire, 
-            string budget, string langueOri, string noteImdb, List<string> genres)
+            string budget, string langueOri, string noteImdb, List<Models.Genre> genres)
         {
             InitializeComponent();
             //Met toutes les données dans les contrôleurs
@@ -30,9 +30,9 @@ namespace Filmap
             tbxBudget.Text = budget;
             tbxLangueOriginale.Text = langueOri;
             tbxNoteIMDB.Text = noteImdb;
-            foreach (string genre in genres)
+            foreach (Models.Genre genre in genres)
             {
-                tbxGenre.Text += genre + Environment.NewLine;
+                tbxGenre.Text += genre.NameGenre + Environment.NewLine;
             }
         }
     }

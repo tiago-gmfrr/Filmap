@@ -17,7 +17,7 @@ namespace Filmap.Models
         /// Récupére le nom de tous les films
         /// </summary>
         /// <returns>List de films</returns>
-        public static List<Film> RecupererFilmsTendance()
+        public static List<Film> RecupererFilmsTendance(string filtreGenre)
         {
             using (System.Net.WebClient webClient = new System.Net.WebClient())
             {
@@ -29,10 +29,54 @@ namespace Filmap.Models
                 var d = jss.Deserialize<dynamic>(data);
 
                 List<Film> filmsTendance = new List<Film>();
+                List<Genre> genreFilm = new List<Genre>();
+
+                List<Genre> tousLesGenres = RecupGenreFilms();
+                int idGenre = 0;
+                bool affiche = false;
+
+
+                foreach (var genre in tousLesGenres)
+                {
+                    
+                    if (genre.NameGenre == filtreGenre)
+                    {
+
+                        idGenre = genre.IdGenre;
+
+                    }
+                }
 
                 foreach (var item in d["results"])
                 {
-                    filmsTendance.Add(new Film(item["id"], item["title"]));
+                    //Récupére les genre du film
+                    foreach (var genre in item["genre_ids"])
+                    {
+                        genreFilm.Add(new Genre(genre));
+
+
+                        if (genre == idGenre)
+                        {
+                            affiche = true;
+                        }
+
+                    }
+                   
+                    if (affiche == true)
+                    {
+                        filmsTendance.Add(new Film(item["id"], item["title"], genreFilm));
+                    }
+                    else
+                    {
+                        if (filtreGenre == "Pas de filtre" || filtreGenre == "")
+                        {
+                            filmsTendance.Add(new Film(item["id"], item["title"], genreFilm));
+                        }
+                    }
+
+
+                    genreFilm.Clear();
+                    affiche = false;
                 }
                 return filmsTendance;
             }
@@ -67,7 +111,7 @@ namespace Filmap.Models
                 string noteIMDB = "";
                 string chiffreAffaire = "";
                 string langueOriginal = "";
-                List<string> genres = new List<string>();
+                List<Genre> genres = new List<Genre>();
 
                 foreach (KeyValuePair<string, object> donnee in donnees)
                 {
@@ -106,7 +150,7 @@ namespace Filmap.Models
                         case "genres":
                             foreach (Dictionary<string, object> infos in donnee.Value as object[])
                             {
-                                genres.Add(infos["name"].ToString());
+                                genres.Add(new Genre(infos["name"].ToString()));
                             }
                             break;
                     }
@@ -179,7 +223,7 @@ namespace Filmap.Models
 
             return listGenre;
         }
-        public static List<Film> RecupRechercheFilmParNom(string nomFilm)
+        public static List<Film> RecupRechercheFilmParNom(string nomFilm, string filtreGenre)
         {
             List<Film> filmsCherches = new List<Film>();
             using (System.Net.WebClient webClient = new System.Net.WebClient())
@@ -192,12 +236,57 @@ namespace Filmap.Models
 
                 var d = jss.Deserialize<dynamic>(data);
 
+                List<Genre> genreFilm = new List<Genre>();
 
+                List<Genre> tousLesGenres = RecupGenreFilms();
+                int idGenre = 0;
+                bool affiche = false;
+
+
+                foreach (var genre in tousLesGenres)
+                {
+                    
+                    if (genre.NameGenre == filtreGenre)
+                    {
+
+                        idGenre = genre.IdGenre;
+                        
+                    }
+
+
+                }
 
                 foreach (var item in d["results"])
                 {
+                    //Récupére les genre du film
+                    foreach (var genre in item["genre_ids"])
+                    {
+                        genreFilm.Add(new Genre(genre));
 
-                    filmsCherches.Add(new Film(item["id"], item["title"]));
+                        if (genre == idGenre)
+                        {
+                            affiche = true;
+
+
+                        }
+
+                    }
+
+                    if (affiche == true)
+                    {
+                        filmsCherches.Add(new Film(item["id"], item["title"], genreFilm));
+                    }
+                    else
+                    {
+                        if (filtreGenre == "Pas de filtre" || filtreGenre == "")
+                        {
+                            filmsCherches.Add(new Film(item["id"], item["title"], genreFilm));
+                        }
+                    }
+
+
+                    genreFilm.Clear();
+                    affiche = false;
                 }
             }
 

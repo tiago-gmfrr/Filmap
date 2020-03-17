@@ -14,6 +14,16 @@ namespace Filmap.Models
         public int IdGenre { get => _idGenre; set => _idGenre = value; }
         public string NameGenre { get => _nameGenre; set => _nameGenre = value; }
 
+        public Genre(int idGenre)
+        {
+            _idGenre = idGenre;
+            
+        }
+        public Genre(string nameGenre)
+        {
+            _nameGenre = nameGenre;
+
+        }
         public Genre(int idGenre, string nameGenre)
         {
             _idGenre = idGenre;

@@ -15,8 +15,8 @@ namespace Filmap.Models
         private string _budget;
         private string _chiffreAffaire;
         private string _langueOriginale;
-        private List<string> _genres;
-        private string _directeur;
+        private List<Genre> _genres;
+        private string _realisateur;
         private string _dateSortie;
 
         public int IdFilm { get => _idFilm; private set => _idFilm = value; }
@@ -26,17 +26,18 @@ namespace Filmap.Models
         public string Budget { get => _budget; private set => _budget = value; }
         public string ChiffreAffaire { get => _chiffreAffaire; private set => _chiffreAffaire = value; }
         public string LangueOriginale { get => _langueOriginale; private set => _langueOriginale = value; }
-        public List<string> Genres { get => _genres; private set => _genres = value; }
-        public string Directeur { get => _directeur; set => _directeur = value; }
+        public List<Genre> Genres { get => _genres; private set => _genres = value; }
+        public string Realisateur { get => _realisateur; set => _realisateur = value; }
         public string DateSortie { get => _dateSortie; set => _dateSortie = value; }
 
-        public Film(int idFilm, string titre)
+        public Film(int idFilm, string titre, List<Genre> listGenre)
         {
             IdFilm = idFilm;
             Titre = titre;
+            Genres = listGenre;
         }
 
-        public Film(int idFilm, string titre, string synopsis, string noteIMDB, string budget, string chiffreAffaire, string langueOriginale, List<string> genres, string directeur, string dateSortie)
+        public Film(int idFilm, string titre, string synopsis, string noteIMDB, string budget, string chiffreAffaire, string langueOriginale, List<Genre> genres, string realisateur, string dateSortie)
         {
             IdFilm = idFilm;
             Titre = titre;
@@ -46,7 +47,7 @@ namespace Filmap.Models
             ChiffreAffaire = chiffreAffaire;
             LangueOriginale = langueOriginale;
             Genres = genres;
-            Directeur = directeur;
+            Realisateur = realisateur;
             DateSortie = dateSortie;
         }
     }
