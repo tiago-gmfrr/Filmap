@@ -83,6 +83,7 @@ namespace Filmap
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
         {
             int idFilm = (int)lsbFilmTendance.SelectedValue;
+            Film t = (Film)lsbFilmTendance.SelectedItem;           
             Models.FilmControleur.AfficherDetailsFilm(idFilm);
         }
 
