@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * 
+ * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
+ * Date        : 17.03.2020
+ * Version     : V1.0
+ * Description : Controleur du programme
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +17,9 @@ namespace Filmap.Models
 {
     class FilmControleur
     {
-
-
+        /// <summary>
+        /// Creation d'un compte
+        /// </summary>
         public static void CreationCompte()
         {
             string pseudo = "";
@@ -26,6 +36,12 @@ namespace Filmap.Models
             dbConnection.AjouterUser(pseudo, email, mdp);
         }
 
+        /// <summary>
+        /// Connection
+        /// </summary>
+        /// <param name="pseudo"></param>
+        /// <param name="mdp"></param>
+        /// <returns></returns>
         public static string Connection(string pseudo, string mdp)
         {
             string erreur = string.Empty;
@@ -66,7 +82,7 @@ namespace Filmap.Models
             //Vérifie que le code s'est bien éxécuté et affiche la fenêtre de détails
             if (f != null)
             {
-                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Realisateur,
+                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Directeur,
                                     f.Synopsis, f.ChiffreAffaire, f.Budget, f.LangueOriginale, f.NoteIMDB, f.Genres);
                 frmDetailFilm.Show();
             }

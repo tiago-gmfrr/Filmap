@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * 
+ * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
+ * Date        : 17.03.2020
+ * Version     : V1.0
+ * Description : Objet film
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +25,7 @@ namespace Filmap.Models
         private string _chiffreAffaire;
         private string _langueOriginale;
         private List<Genre> _genres;
-        private string _realisateur;
+        private string _directeur;
         private string _dateSortie;
 
         public int IdFilm { get => _idFilm; private set => _idFilm = value; }
@@ -27,7 +36,7 @@ namespace Filmap.Models
         public string ChiffreAffaire { get => _chiffreAffaire; private set => _chiffreAffaire = value; }
         public string LangueOriginale { get => _langueOriginale; private set => _langueOriginale = value; }
         public List<Genre> Genres { get => _genres; private set => _genres = value; }
-        public string Realisateur { get => _realisateur; set => _realisateur = value; }
+        public string Directeur { get => _directeur; set => _directeur = value; }
         public string DateSortie { get => _dateSortie; set => _dateSortie = value; }
 
         public Film(int idFilm, string titre, List<Genre> listGenre)
@@ -36,8 +45,7 @@ namespace Filmap.Models
             Titre = titre;
             Genres = listGenre;
         }
-
-        public Film(int idFilm, string titre, string synopsis, string noteIMDB, string budget, string chiffreAffaire, string langueOriginale, List<Genre> genres, string realisateur, string dateSortie)
+        public Film(int idFilm, string titre, string synopsis, string noteIMDB, string budget, string chiffreAffaire, string langueOriginale, List<Genre> genres, string directeur, string dateSortie)
         {
             IdFilm = idFilm;
             Titre = titre;
@@ -47,7 +55,7 @@ namespace Filmap.Models
             ChiffreAffaire = chiffreAffaire;
             LangueOriginale = langueOriginale;
             Genres = genres;
-            Realisateur = realisateur;
+            Directeur = directeur;
             DateSortie = dateSortie;
         }
     }

@@ -1,4 +1,13 @@
-﻿using Filmap.Models;
+﻿/*
+ * 
+ * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
+ * Date        : 17.03.2020
+ * Version     : V1.0
+ * Description : Affichage des films
+ * 
+ */
+
+using Filmap.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,6 +40,12 @@ namespace Filmap
             FrmAccueil = frmAccueil;
         }
 
+        /// <summary>
+        /// Récupère les films tendance et les genres de films 
+        /// et ensuite les affiche
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmMain_Load(object sender, EventArgs e)
         {
             
@@ -41,21 +56,30 @@ namespace Filmap
             {
                 msConnecte.Visible = false;
             }
+
             foreach (var item in genres)
             {
                 cmbFiltreGenre.Items.Add(item.NameGenre);  
             }
-
+            cmbFiltre.SelectedIndex = 0;
+            cmbFiltreGenre.SelectedIndex = 0;
             RefreshListBoxDataSource();
         }
 
+        /// <summary>
+        /// Actualise la listbox des films
+        /// </summary>
         private void RefreshListBoxDataSource()
         {
             lsbFilmTendance.DataSource = films;
             lsbFilmTendance.DisplayMember = "Titre";
             lsbFilmTendance.ValueMember = "IdFilm";
         }
-
+        /// <summary>
+        /// Ouvre une form contenant plus d'informations sur le film choisi
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
         {
             int idFilm = (int)lsbFilmTendance.SelectedValue;
@@ -63,7 +87,11 @@ namespace Filmap
         }
 
 
-
+        /// <summary>
+        /// Actualise la recherche à chaque fois que l'utilisateur ecris sur la textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbxRecherche_TextChanged(object sender, EventArgs e)
         {
             string filmAChercher = tbxRecherche.Text;
@@ -77,7 +105,12 @@ namespace Filmap
         {
             FrmAccueil.Visible = true;
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbFiltre_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbFiltre.SelectedItem.ToString() == "Recherche d'acteurs")
@@ -96,11 +129,24 @@ namespace Filmap
             }
         }
 
+        /// <summary>
+        /// Choix d'un filtre de genre pour les films
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbFiltreGenre_SelectedIndexChanged(object sender, EventArgs e)
         {
             FiltreGenre = cmbFiltreGenre.SelectedItem.ToString();
-            films = Models.FilmControleur.RecupererFilmsTendance(FiltreGenre);
 
+            if (tbxRecherche.Text == string.Empty)
+            {
+                films = Models.FilmControleur.RecupererFilmsTendance(FiltreGenre);
+            }
+            else
+            {
+                films = Models.FilmControleur.RechercheFilmParNom(tbxRecherche.Text, FiltreGenre);
+            }
+            
             RefreshListBoxDataSource();
         }
     }

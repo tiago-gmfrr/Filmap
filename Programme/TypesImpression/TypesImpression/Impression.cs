@@ -21,60 +21,6 @@ namespace TypesImpression
         }
         public void printDocument(System.Drawing.Printing.PrintPageEventArgs e)
         {
-            /*int marge = 50;
-            int largeurMax = 720;
-            int hauteurTexte = 30;
-            //e.Graphics.DrawRectangle(new Pen(Color.BlueViolet, 1), marge, marge, largeurMax, 5);
-            e.Graphics.DrawString("Ma liste de Films", new Font("Papyrus", 24, FontStyle.Bold),
-            Brushes.Black, 260, hauteurTexte);
-
-            Font fConsolas10Bold = new Font("Consolas", 10, FontStyle.Bold);
-            Font fConsolas10Regular = new Font("Consolas", 10, FontStyle.Regular);
-            Font fArial10Regular = new Font("Arial", 10, FontStyle.Regular);
-            Font fArial10Bold = new Font("Arial", 10, FontStyle.Bold);
-
-            Image img = Image.FromFile("ahri.jpg");
-            float x = 80.0F;
-            float y = 140.0F;
-
-            RectangleF srcRect = new RectangleF(100.0F, 100.0F, 300.0F, 300.0F);
-            GraphicsUnit units = GraphicsUnit.Pixel;
-            hauteurTexte += 90;
-            foreach (string listeFilm in lstFilms)
-            {
-                e.Graphics.DrawString(" Nom du Film : ", fConsolas10Bold, Brushes.Blue, 60, hauteurTexte);
-                e.Graphics.DrawString("Shrek", fArial10Bold, Brushes.Black, 170, hauteurTexte);
-                e.Graphics.DrawString("Acteur principal :", fConsolas10Bold, Brushes.Blue, 500, hauteurTexte);
-                e.Graphics.DrawString(listeFilm.ToString(), fArial10Bold, Brushes.Black, 645, hauteurTexte);
-                e.Graphics.DrawImage(img, x, y, srcRect, units);
-                e.Graphics.DrawRectangle(new Pen(Color.Black, 1), marge, hauteurTexte, largeurMax, 350);
-                hauteurTexte += 350;
-                y += 350;
-                if (hauteurTexte > e.MarginBounds.Bottom)
-                {
-                    e.HasMorePages = true;
-                    hauteurTexte = 30;
-                    return;
-                }
-                e.HasMorePages = false;
-            }
-     
-
-
-
-            string chaineImpression = "";
-            int nbCaractParLigne = 87;
-            hauteurTexte -= 7;
-            while (chaineImpression.Length > 0)
-            {
-                string ligne = chaineImpression.Substring(0, nbCaractParLigne);
-                chaineImpression = chaineImpression.Remove(0, nbCaractParLigne);
-                hauteurTexte += 18;
-                e.Graphics.DrawString(ligne, fConsolas10Regular, Brushes.Black, 65, hauteurTexte);
-                if (chaineImpression.Length < nbCaractParLigne)
-                    nbCaractParLigne = chaineImpression.Length;
-            }
-         */
 
             /*
              * https://www.codeproject.com/Questions/68575/How-to-print-more-pages-in-C-printdocument
@@ -87,7 +33,8 @@ namespace TypesImpression
 
             float yLineTop = e.MarginBounds.Top;
 
-            for (; _Line < 3; _Line++)
+            for (
+			_Line < 3; _Line++)
             {
                 if (yLineTop + lineHeight > e.MarginBounds.Bottom)
                 {
