@@ -1,13 +1,4 @@
-﻿/*
- * 
- * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
- * Date        : 17.03.2020
- * Version     : V1.0
- * Description : Controleur du programme
- * 
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +8,8 @@ namespace Filmap.Models
 {
     class FilmControleur
     {
-        /// <summary>
-        /// Creation d'un compte
-        /// </summary>
+
+
         public static void CreationCompte()
         {
             string pseudo = "";
@@ -36,12 +26,6 @@ namespace Filmap.Models
             dbConnection.AjouterUser(pseudo, email, mdp);
         }
 
-        /// <summary>
-        /// Connection
-        /// </summary>
-        /// <param name="pseudo"></param>
-        /// <param name="mdp"></param>
-        /// <returns></returns>
         public static string Connection(string pseudo, string mdp)
         {
             string erreur = string.Empty;
@@ -67,11 +51,21 @@ namespace Filmap.Models
 
             frmMain.Show();
         }
+        public static void infoUtilisateur(frmMain fm, Utilisateur user)
+        {
+            frmInfoUser frmInfo = new frmInfoUser(fm, user);
+            frmInfo.Show();
+        }
+        public static void voirListes(frmMain fm, Utilisateur user)
+        {
+            frmListeFilms frmListe = new frmListeFilms(fm, user);
+            frmListe.Show();
+        }
         public static void ModeConnecte(frmAccueil fa, string pseudo)
         {
             
             frmMain frmMain = new frmMain(fa, pseudo);
-
+            
             frmMain.Show();
         }
 
@@ -82,7 +76,7 @@ namespace Filmap.Models
             //Vérifie que le code s'est bien éxécuté et affiche la fenêtre de détails
             if (f != null)
             {
-                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Directeur,
+                frmDetailFilm frmDetailFilm = new frmDetailFilm(f.Titre, f.DateSortie, f.Realisateur,
                                     f.Synopsis, f.ChiffreAffaire, f.Budget, f.LangueOriginale, f.NoteIMDB, f.Genres);
                 frmDetailFilm.Show();
             }
@@ -109,6 +103,10 @@ namespace Filmap.Models
         public static List<Genre> RecupGenresFilms()
         {
             return RecupFilms.RecupGenreFilms();
+        }
+        public static string getUserMail(string user)
+        {
+            return dbConnection.getUserEmail(user);
         }
 
     }

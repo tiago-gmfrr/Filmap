@@ -87,6 +87,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmInfoUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInfoUser.Designer.cs">
+      <DependentUpon>frmInfoUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmListeFilms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListeFilms.Designer.cs">
+      <DependentUpon>frmListeFilms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\dbConnection.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\FilmControleur.cs" />
@@ -116,6 +128,7 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmDetailFilm.resx">
@@ -127,8 +140,14 @@
     <EmbeddedResource Include="frmAccueil.resx">
       <DependentUpon>frmAccueil.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmInfoUser.resx">
+      <DependentUpon>frmInfoUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListeFilms.resx">
+      <DependentUpon>frmListeFilms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -164,6 +183,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

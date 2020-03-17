@@ -1,12 +1,4 @@
-﻿/*
- * 
- * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
- * Date        : 17.03.2020
- * Version     : V1.0
- * Description : Objet Genre
- * 
- */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

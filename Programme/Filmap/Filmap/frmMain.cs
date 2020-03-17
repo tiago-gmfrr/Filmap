@@ -1,13 +1,4 @@
-﻿/*
- * 
- * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
- * Date        : 17.03.2020
- * Version     : V1.0
- * Description : Affichage des films
- * 
- */
-
-using Filmap.Models;
+﻿using Filmap.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,6 +20,7 @@ namespace Filmap
         List<Film> films = new List<Film>();
         List<Genre> genres = new List<Genre>();
         frmAccueil FrmAccueil;
+        Utilisateur user = new Utilisateur();
 
         public string FiltreGenre { get => filtreGenre; set => filtreGenre = value; }
         public string Pseudo { get => pseudo; set => pseudo = value; }
@@ -40,59 +32,44 @@ namespace Filmap
             FrmAccueil = frmAccueil;
         }
 
-        /// <summary>
-        /// Récupère les films tendance et les genres de films 
-        /// et ensuite les affiche
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmMain_Load(object sender, EventArgs e)
         {
             
             films = Models.FilmControleur.RecupererFilmsTendance(filtreGenre);
             genres = Models.FilmControleur.RecupGenresFilms();
 
-            if (Pseudo == "")
-            {
-                msConnecte.Visible = false;
-            }
+            user.Pseudo = Pseudo;
+            user.Email = Models.dbConnection.getUserEmail(Pseudo);
 
+            if (Pseudo != "")
+            {
+                msConnecte.Visible = true;
+                btnAjouterFilmAvoir.Visible = true;
+                btnAjouterFilmPrefere.Visible = true;
+            }
             foreach (var item in genres)
             {
                 cmbFiltreGenre.Items.Add(item.NameGenre);  
             }
-            cmbFiltre.SelectedIndex = 0;
-            cmbFiltreGenre.SelectedIndex = 0;
+
             RefreshListBoxDataSource();
         }
 
-        /// <summary>
-        /// Actualise la listbox des films
-        /// </summary>
         private void RefreshListBoxDataSource()
         {
             lsbFilmTendance.DataSource = films;
             lsbFilmTendance.DisplayMember = "Titre";
             lsbFilmTendance.ValueMember = "IdFilm";
         }
-        /// <summary>
-        /// Ouvre une form contenant plus d'informations sur le film choisi
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void lsbFilmTendance_DoubleClick(object sender, EventArgs e)
         {
             int idFilm = (int)lsbFilmTendance.SelectedValue;
-            Film t = (Film)lsbFilmTendance.SelectedItem;           
             Models.FilmControleur.AfficherDetailsFilm(idFilm);
         }
 
 
-        /// <summary>
-        /// Actualise la recherche à chaque fois que l'utilisateur ecris sur la textbox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void tbxRecherche_TextChanged(object sender, EventArgs e)
         {
             string filmAChercher = tbxRecherche.Text;
@@ -106,49 +83,46 @@ namespace Filmap
         {
             FrmAccueil.Visible = true;
         }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cmbFiltre_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbFiltre.SelectedItem.ToString() == "Recherche d'acteurs")
-            {
-                cmbFiltreGenre.Enabled = false;
-                btnAjouterFilmAvoir.Visible = false;
-                btnAjouterFilmPrefere.Visible = false;
-                btnAjouterActeurPrefere.Visible = true;
-            }
-            else
-            {
-                cmbFiltreGenre.Enabled = true;
-                btnAjouterFilmAvoir.Visible = true;
-                btnAjouterFilmPrefere.Visible = true;
-                btnAjouterActeurPrefere.Visible = false;
-            }
-        }
 
-        /// <summary>
-        /// Choix d'un filtre de genre pour les films
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+       
+
         private void cmbFiltreGenre_SelectedIndexChanged(object sender, EventArgs e)
         {
             FiltreGenre = cmbFiltreGenre.SelectedItem.ToString();
+            films = Models.FilmControleur.RecupererFilmsTendance(FiltreGenre);
 
-            if (tbxRecherche.Text == string.Empty)
-            {
-                films = Models.FilmControleur.RecupererFilmsTendance(FiltreGenre);
-            }
-            else
-            {
-                films = Models.FilmControleur.RechercheFilmParNom(tbxRecherche.Text, FiltreGenre);
-            }
-            
             RefreshListBoxDataSource();
         }
+
+        private void tsmVoirMesListes_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Models.FilmControleur.infoUtilisateur(this, user);
+        }
+
+        private void btnAjouterFilmPrefere_Click(object sender, EventArgs e)
+        {
+            Film t = (Film)lsbFilmTendance.SelectedItem;
+            string titre = t.Titre;
+           
+            Film newFilm = new Film(titre);
+            user.ajouterFilmDansFilmPrefere(newFilm);
+        }
+
+        
+
+        private void tsmSeDeconnecter_Click(object sender, EventArgs e)
+        {
+            Pseudo = "";
+            this.Close();
+        }
+
+        private void tsmVoirMesListe_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Models.FilmControleur.voirListes(this, user);
+        }
+
+        
     }
 }

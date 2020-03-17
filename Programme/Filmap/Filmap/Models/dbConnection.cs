@@ -1,13 +1,4 @@
-﻿/*
- * 
- * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
- * Date        : 17.03.2020
- * Version     : V1.0
- * Description : Requetes de la base de données
- * 
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,20 +12,17 @@ using System.Windows.Forms;
 
 namespace Filmap.Models
 {
-    public class dbConnection
+    class dbConnection
     {
         //Chaine de connexion
         const string chaineConnexion = "Data Source = ../../bdFilmap.sqlite;Version=3";
         //Initialisation de la connexion
         static SQLiteConnection maConnexion = new SQLiteConnection(chaineConnexion);
-        /// <summary>
-        /// Ajout d'un utilisateur à la base de données, avec un mot de passe hashé et salé
-        /// </summary>
-        /// <param name="pseudo">Identificateur de l'utilisateur</param>
-        /// <param name="email">Email de l'utilisateur</param>
-        /// <param name="mdp">Mot de passe de l'utilisateur</param>
+
         public static void AjouterUser(string pseudo, string email, string mdp)
         {
+
+
             SHA1 sha1Hash = SHA1.Create();
             byte[] salt;
             new RNGCryptoServiceProvider().GetBytes(salt = new byte[13]);
@@ -57,12 +45,6 @@ namespace Filmap.Models
             maConnexion.Close();
 
         }
-        /// <summary>
-        /// Vérifie si le pseudo et le mdp rentrés par l'utilisateur correspondent à une entree dans la base de données
-        /// </summary>
-        /// <param name="pseudo">Identificateur de l'utilisateur</param>
-        /// <param name="mdp">Mot de passe de l'utilisateur</param>
-        /// <returns></returns>
         public static bool Connection(string pseudo, string mdp)
         {
             SHA1 sha1Hash = SHA1.Create();
@@ -97,7 +79,7 @@ namespace Filmap.Models
             string hash = BitConverter.ToString(userHashedMdp).Replace("-", String.Empty);
 
 
-           // Console.WriteLine(hash);
+           
 
             if (pseudo == truePseudo && hash == hashedMdp)
             {                
@@ -105,6 +87,28 @@ namespace Filmap.Models
             }
 
             return reussi;
+        }
+        public static string getUserEmail(string pseudo)
+        {
+            string mail = "";
+
+            string sql = string.Format("SELECT mail FROM Utilisateur WHERE pseudo ='" + pseudo + "'");
+            // Affectation de la commande sqlite
+            SQLiteCommand sqliteCom = new SQLiteCommand(sql, maConnexion);
+            //Ouverture de la connexion
+            maConnexion.Open();
+            //On affecte le sqliteReader
+            SQLiteDataReader reader = sqliteCom.ExecuteReader();
+            while (reader.Read())
+            {             
+                mail = reader["mail"].ToString();
+            }
+            //Ferme le reader
+            reader.Close();
+            //Ferme la connexion
+            maConnexion.Close();
+
+            return mail;
         }
     }
 }
