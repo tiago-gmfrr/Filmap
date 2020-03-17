@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * 
+ * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
+ * Date        : 17.03.2020
+ * Version     : V1.0
+ * Description : Objet utilisateur
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

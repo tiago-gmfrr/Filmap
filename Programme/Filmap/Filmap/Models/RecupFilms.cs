@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * 
+ * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
+ * Date        : 17.03.2020
+ * Version     : V1.0
+ * Description : Requetes de l'API TheMovieDB
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +22,10 @@ namespace Filmap.Models
         const string API_KEY = "219c3d7d9df2bb83f83cf2582b13a20d";
 
         /// <summary>
-        /// Récupére le nom de tous les films
+        /// Récupére le nom de tous les films et filtre les résultats par un filtre de genre si nécéssaire
         /// </summary>
-        /// <returns>List de films</returns>
+        /// <param name="filtreGenre">Genre à filtrer</param>
+        /// <returns>Liste de films tendances</returns>
         public static List<Film> RecupererFilmsTendance(string filtreGenre)
         {
             using (System.Net.WebClient webClient = new System.Net.WebClient())
@@ -87,7 +96,7 @@ namespace Filmap.Models
         /// Récupére toutes les infos du film
         /// </summary>
         /// <param name="idFilm">idFilm</param>
-        /// <returns>Dictionnaire string, object</returns>
+        /// <returns>Toutes les informations d'un film</returns>
         public static Film InfosFilmPrecis(int idFilm)
         {
             Dictionary<string, object> donnees = new Dictionary<string, object>();
@@ -198,6 +207,10 @@ namespace Filmap.Models
             return directeur;
         }
 
+        /// <summary>
+        /// Récupère tous les genres de film possibles
+        /// </summary>
+        /// <returns>Liste de genres</returns>
         public static List<Genre> RecupGenreFilms()
         {
             List<Genre> listGenre = new List<Genre>();
@@ -223,6 +236,12 @@ namespace Filmap.Models
 
             return listGenre;
         }
+        /// <summary>
+        /// Recherche des films avec des titres similaires à celui rentré par l'utilisateur + filtrés par le genre désiré
+        /// </summary>
+        /// <param name="nomFilm">Nom du film rentré par l'utilisateur</param>        
+        /// <param name="filtreGenre">Genre à filtrer</param>
+        /// <returns>Liste de films qui correspondent a la recherche de l'utilisateur</returns>
         public static List<Film> RecupRechercheFilmParNom(string nomFilm, string filtreGenre)
         {
             List<Film> filmsCherches = new List<Film>();

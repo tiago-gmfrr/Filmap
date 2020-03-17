@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * 
+ * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
+ * Date        : 17.03.2020
+ * Version     : V1.0
+ * Description : Requetes de la base de données
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,13 +20,18 @@ using System.Windows.Forms;
 
 namespace Filmap.Models
 {
-    class dbConnection
+    public class dbConnection
     {
         //Chaine de connexion
         const string chaineConnexion = "Data Source = ../../bdFilmap.sqlite;Version=3";
         //Initialisation de la connexion
         static SQLiteConnection maConnexion = new SQLiteConnection(chaineConnexion);
-
+        /// <summary>
+        /// Ajout d'un utilisateur à la base de données, avec un mot de passe hashé et salé
+        /// </summary>
+        /// <param name="pseudo">Identificateur de l'utilisateur</param>
+        /// <param name="email">Email de l'utilisateur</param>
+        /// <param name="mdp">Mot de passe de l'utilisateur</param>
         public static void AjouterUser(string pseudo, string email, string mdp)
         {
 
@@ -45,6 +58,12 @@ namespace Filmap.Models
             maConnexion.Close();
 
         }
+        /// <summary>
+        /// Vérifie si le pseudo et le mdp rentrés par l'utilisateur correspondent à une entree dans la base de données
+        /// </summary>
+        /// <param name="pseudo">Identificateur de l'utilisateur</param>
+        /// <param name="mdp">Mot de passe de l'utilisateur</param>
+        /// <returns></returns>
         public static bool Connection(string pseudo, string mdp)
         {
             SHA1 sha1Hash = SHA1.Create();
@@ -88,6 +107,11 @@ namespace Filmap.Models
 
             return reussi;
         }
+        /// <summary>
+        /// Récuperer l'email de l'utilisateur
+        /// </summary>
+        /// <param name="pseudo">Identificateur de l'utilisateur</param>
+        /// <returns>Email de l'utilisateur</returns>
         public static string getUserEmail(string pseudo)
         {
             string mail = "";

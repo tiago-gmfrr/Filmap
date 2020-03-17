@@ -1,4 +1,12 @@
-﻿using Filmap.Models;
+﻿/*
+ * 
+ * Auteurs     : Cruz Elian, Russo Christian, Carvalho Daniel, Gama Tiago
+ * Date        : 17.03.2020
+ * Version     : V1.0
+ * Description : Affichage des films
+ * 
+ */
+using Filmap.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,6 +60,7 @@ namespace Filmap
                 cmbFiltreGenre.Items.Add(item.NameGenre);  
             }
 
+            cmbFiltreGenre.SelectedIndex = 0;
             RefreshListBoxDataSource();
         }
 
